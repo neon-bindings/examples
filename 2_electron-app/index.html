@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Electron, meet Neon!</title>
+  </head>
+  <body>
+    <script>
+      try {
+        document.write(`<h1>${require('neon-hello').hello()}</h1>`);
+      } catch (e) {
+        document.write(`<pre>${e.stack}</pre>`);
+      }
+    </script>
+
+    <p>If the title &uarr; says "Hello from Neon!" then we're good &#x1f60a;</p>
+  </body>
+</html>

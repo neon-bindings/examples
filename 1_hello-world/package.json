@@ -1,0 +1,18 @@
+{
+  "name": "threading-hint",
+  "version": "0.1.0",
+  "description": "Returns a number indicating how much hardware multithreading the current machine supports.",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neon-bindings/examples"
+  },
+  "author": "Dave Herman <david.herman@gmail.com>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "neon-cli": "^0.2.0"
+  },
+  "scripts": {
+    "install": "neon build"
+  }
+}
