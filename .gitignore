@@ -17,4 +17,5 @@ node_modules
 .idea
 npm-debug.log.*
 target
-native
+artifacts.json
+index.node

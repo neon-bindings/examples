@@ -1,0 +1,13 @@
+[package]
+name = "word-counting-demo"
+version = "0.1.2"
+authors = ["Dave Herman <dherman@mozilla.com>"]
+license = "MIT"
+
+[lib]
+name = "word_counting_demo"
+crate-type = ["dylib"]
+
+[dependencies]
+neon = "0.2"
+rayon = "1.0.3"
