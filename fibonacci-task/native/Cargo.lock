@@ -46,7 +46,12 @@ dependencies = [
 ]
 
 [[package]]
-name = "neon-bigint-task"
+name = "neon-build"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "neon-fibonacci-task"
 version = "0.1.0"
 dependencies = [
  "neon 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -54,11 +59,6 @@ dependencies = [
  "num-bigint 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "num-traits 0.2.5 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
-
-[[package]]
-name = "neon-build"
-version = "0.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "neon-runtime"

@@ -1,12 +1,10 @@
 [package]
-name = "neon-binary-example"
+name = "neon-fibonacci-task"
 version = "0.1.0"
-authors = ["David Herman <david.herman@gmail.com>"]
-license = "MIT"
 build = "build.rs"
 
 [lib]
-name = "neon_binary_example"
+name = "neon_fibonacci_task"
 crate-type = ["dylib"]
 
 [build-dependencies]
@@ -14,4 +12,5 @@ neon-build = "0.2"
 
 [dependencies]
 neon = "0.2"
-cslice = "0.3.0"
+num-bigint = "0.2"
+num-traits = "0.2"

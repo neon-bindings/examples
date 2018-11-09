@@ -1,10 +1,10 @@
 [package]
-name = "threading-hint"
+name = "neon-sharing-binary-data-example"
 version = "0.1.0"
 build = "build.rs"
 
 [lib]
-name = "threading_hint"
+name = "neon_sharing_binary_data_example"
 crate-type = ["dylib"]
 
 [build-dependencies]
@@ -12,4 +12,4 @@ neon-build = "0.2"
 
 [dependencies]
 neon = "0.2"
-num_cpus = "1.4.0"
+cslice = "0.3.0"

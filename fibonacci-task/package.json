@@ -1,7 +1,7 @@
 {
-  "name": "neon-class-example",
-  "version": "0.0.1",
-  "description": "A simple example of a Neon class",
+  "name": "neon-fibonacci-task",
+  "version": "0.1.0",
+  "description": "",
   "main": "lib/index.js",
   "dependencies": {
     "neon-cli": "^0.2.0"

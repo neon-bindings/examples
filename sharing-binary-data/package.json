@@ -1,9 +1,8 @@
 {
-  "name": "neon-bigint-task",
+  "name": "neon-binary-example",
   "version": "0.1.0",
-  "description": "",
+  "description": "An example of sharing binary data between JS and Rust",
   "main": "lib/index.js",
-  "author": "David Herman <david.herman@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "neon-cli": "^0.2.0"

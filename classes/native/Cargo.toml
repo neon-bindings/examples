@@ -1,8 +1,6 @@
 [package]
 name = "neon-class-example"
 version = "0.0.1"
-authors = ["Dave Herman <dherman@mozilla.com>"]
-license = "MIT"
 
 [lib]
 name = "neon_class_example"
