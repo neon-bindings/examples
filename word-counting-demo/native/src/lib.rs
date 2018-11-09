@@ -4,25 +4,25 @@ extern crate rayon;
 
 use std::str;
 
-use rayon::iter::{ParallelIterator, IntoParallelIterator};
+use rayon::iter::{IntoParallelIterator, ParallelIterator};
 
 use neon::prelude::JsString;
 use neon::prelude::*;
-// use neon::mem::Handle;
 
 fn lines(corpus: &str) -> Vec<&str> {
-    corpus.lines()
-          .map(|line| {
-              line.splitn(4, ',').nth(3).unwrap().trim()
-          })
-          .collect()
+    corpus
+        .lines()
+        .map(|line| line.splitn(4, ',').nth(3).unwrap().trim())
+        .collect()
 }
 
 fn matches(word: &str, search: &str) -> bool {
     let mut search = search.chars();
     for ch in word.chars().skip_while(|ch| !ch.is_alphabetic()) {
         match search.next() {
-            None => { return !ch.is_alphabetic(); }
+            None => {
+                return !ch.is_alphabetic();
+            }
             Some(expect) => {
                 if ch.to_lowercase().next() != Some(expect) {
                     return false;
@@ -54,15 +54,17 @@ fn wc_line(line: &str, search: &str) -> i32 {
 */
 
 fn wc_sequential(lines: &Vec<&str>, search: &str) -> i32 {
-    lines.into_iter()
-         .map(|line| wc_line(line, search))
-         .fold(0, |sum, line| sum + line)
+    lines
+        .into_iter()
+        .map(|line| wc_line(line, search))
+        .fold(0, |sum, line| sum + line)
 }
 
 fn wc_parallel(lines: &Vec<&str>, search: &str) -> i32 {
-    lines.into_par_iter()
-         .map(|line| wc_line(line, search))
-         .sum()
+    lines
+        .into_par_iter()
+        .map(|line| wc_line(line, search))
+        .sum()
 }
 
 fn search(mut cx: FunctionContext) -> JsResult<JsNumber> {
@@ -76,6 +78,4 @@ fn search(mut cx: FunctionContext) -> JsResult<JsNumber> {
     Ok(cx.number(total))
 }
 
-register_module!(mut m, {
-    m.export_function("search", search)
-});
+register_module!(mut m, { m.export_function("search", search) });

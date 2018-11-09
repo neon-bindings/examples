@@ -6,7 +6,7 @@ extern crate num_traits;
 use neon::prelude::*;
 
 use num_bigint::BigUint;
-use num_traits::{Zero, One};
+use num_traits::{One, Zero};
 use std::mem::replace;
 
 fn compute(n: usize) -> BigUint {
@@ -27,7 +27,7 @@ fn fibonacci_sync(mut cx: FunctionContext) -> JsResult<JsString> {
 }
 
 struct FibonacciTask {
-    argument: usize
+    argument: usize,
 }
 
 impl Task for FibonacciTask {
@@ -39,7 +39,11 @@ impl Task for FibonacciTask {
         Ok(compute(self.argument))
     }
 
-    fn complete<'a>(self, mut cx: TaskContext<'a>, result: Result<BigUint, ()>) -> JsResult<JsString> {
+    fn complete<'a>(
+        self,
+        mut cx: TaskContext<'a>,
+        result: Result<BigUint, ()>,
+    ) -> JsResult<JsString> {
         Ok(cx.string(result.unwrap().to_str_radix(10)))
     }
 }

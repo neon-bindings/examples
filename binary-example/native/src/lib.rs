@@ -2,8 +2,8 @@
 extern crate neon;
 extern crate cslice;
 
-use neon::prelude::*;
 use cslice::CMutSlice;
+use neon::prelude::*;
 use std::mem;
 
 fn hello(mut cx: FunctionContext) -> JsResult<JsArrayBuffer> {
@@ -20,6 +20,4 @@ fn hello(mut cx: FunctionContext) -> JsResult<JsArrayBuffer> {
     Ok(buffer)
 }
 
-register_module!(mut m, {
-    m.export_function("hello", hello)
-});
+register_module!(mut m, { m.export_function("hello", hello) });
