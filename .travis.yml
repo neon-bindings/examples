@@ -9,7 +9,6 @@ matrix:
         - TRAVIS_NODE_VERSION="11"
         - ELECTRON_CACHE=$HOME/.cache/electron
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
-
     - os: linux
       language: rust
       rust: nightly-2018-10-12
@@ -25,6 +24,13 @@ matrix:
             - gcc-multilib
             - g++-8
             - g++-multilib
+    - os: windows
+      language: rust
+      rust: nightly-2018-10-12
+      env:
+        - TRAVIS_NODE_VERSION="11"
+        - ELECTRON_CACHE=$HOME/.cache/electron
+        - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 
 cache: cargo
 
