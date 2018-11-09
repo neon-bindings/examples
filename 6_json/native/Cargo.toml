@@ -1,0 +1,21 @@
+[package]
+name = "neon-serde-example"
+version = "0.1.0"
+authors = ["Amila Welihinda <amilajack@gmail.com>"]
+license = "MIT"
+build = "build.rs"
+exclude = ["artifacts.json", "index.node"]
+
+[lib]
+name = "neon_serde_example"
+crate-type = ["dylib"]
+
+[build-dependencies]
+neon-build = "0.2.0"
+
+[dependencies]
+neon = "0.2.0"
+# neon-serde = "0.0.3"
+neon-serde = { git = "https://github.com/GabrielCastro/neon-serde" }
+serde_derive = "1.0.80"
+serde = "1.0.80"

@@ -1,3 +1,3 @@
-# neon-binary-example
+# binary
 
 An example of sharing binary data between JS and Rust.
