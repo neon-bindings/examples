@@ -9,5 +9,5 @@ fn threading_hint(mut cx: FunctionContext) -> JsResult<JsNumber> {
 }
 
 register_module!(mut m, {
-    m.export_function("threading_hint", threading_hint)
+    m.export_function("threadingHint", threading_hint)
 });
