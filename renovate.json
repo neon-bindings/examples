@@ -1,5 +1,11 @@
 {
   "extends": [
     "config:base"
-  ]
+  ],
+  "automerge": true,
+  "major": {
+    "automerge": false
+  },
+  "rangeStrategy": "bump",
+  "schedule": "on saturday"
 }
