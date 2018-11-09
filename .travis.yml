@@ -26,6 +26,8 @@ matrix:
             - g++-8
             - g++-multilib
 
+cache: cargo
+
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CXX="g++-8"; fi
   - nvm install $TRAVIS_NODE_VERSION
