@@ -1,0 +1,39 @@
+matrix:
+  allow_failures:
+    - os: windows
+  include:
+    - os: osx
+      language: rust
+      rust: nightly-2018-10-12
+      env:
+        - TRAVIS_NODE_VERSION="11"
+        - ELECTRON_CACHE=$HOME/.cache/electron
+        - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+
+    - os: linux
+      language: rust
+      rust: nightly-2018-10-12
+      env:
+        - TRAVIS_NODE_VERSION="11"
+        - ELECTRON_CACHE=$HOME/.cache/electron
+        - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-multilib
+            - g++-8
+            - g++-multilib
+
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CXX="g++-8"; fi
+  - nvm install $TRAVIS_NODE_VERSION
+  - nvm use ${TRAVIS_NODE_VERSION}
+  - node -v
+  - npm -v
+  - npm i -g yarn neon-cli lerna
+
+script:
+  - lerna bootstrap
+  - lerna run install

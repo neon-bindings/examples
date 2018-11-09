@@ -10,7 +10,7 @@
   "author": "David Herman <david.herman@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "neon-cli": "^0.1.19"
+    "neon-cli": "^0.2.0"
   },
   "scripts": {
     "install": "neon build"

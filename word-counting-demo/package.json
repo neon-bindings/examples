@@ -3,7 +3,7 @@
   "description": "A word count demo to showcase Neon.",
   "main": "lib/index.js",
   "dependencies": {
-    "neon-cli": "^0.1.6"
+    "neon-cli": "^0.2.0"
   },
   "scripts": {
     "install": "neon build"
