@@ -1,6 +1,6 @@
-# examples
+# neon-examples
 
-[![Build Status](https://travis-ci.com/amilajack/examples.svg?branch=master)](https://travis-ci.com/amilajack/examples)
+[![Build Status](https://travis-ci.com/amilajack/neon-examples.svg?branch=master)](https://travis-ci.com/amilajack/neon-examples)
 
 ## Table of Contents
 
@@ -15,8 +15,8 @@
 ## Setup
 
 ```bash
-git clone https://github.com/amilajack/examples
-cd examples
+git clone https://github.com/amilajack/neon-examples
+cd neon-examples
 npm install -g lerna
 lerna bootstrap
 lerna run build
