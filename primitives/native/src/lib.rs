@@ -21,11 +21,11 @@ fn primitives(mut cx: FunctionContext) -> JsResult<JsUndefined> {
 
     // Undefined
     let _undefined = cx.undefined(); // preferred
-    let _undefined = JsUndefined::new(&mut cx);
+    let _undefined = JsUndefined::new();
 
     // Null
     let _null = cx.null(); // preferred
-    let _null = JsNull::new(&mut cx);
+    let _null = JsNull::new();
 
     Ok(cx.undefined())
 }

@@ -34,12 +34,20 @@ fn construct_js_function(mut cx: FunctionContext) -> JsResult<JsNumber> {
 }
 
 // Returning Functions
+// Create a function to be returned
+fn add1(mut cx: FunctionContext) -> JsResult<JsNumber> {
+    // Attempt to cast the first argument to a JsNumber. Then
+    // get the value if cast is successul
+    let x = cx.argument::<JsNumber>(0)?.value();
+    Ok(cx.number(x + 1.0))
+}
+
+// Then reutrn the function
 fn return_js_function(mut cx: FunctionContext) -> JsResult<JsFunction> {
     JsFunction::new(&mut cx, add1)
 }
 
 register_module!(mut cx, {
-    cx.export_function("hello", hello)
     cx.export_function("requireObjectThis", require_object_this)?;
     cx.export_function("callJsFunction", call_js_function)?;
     cx.export_function("constructJsFunction", construct_js_function)?;
