@@ -3,6 +3,7 @@ const {hrtime} = process;
 function Benchmark(result, diff) {
   this.result = result;
   this.elapsed = diff;
+  // eslint-disable-next-line
   this.sec = diff[0];
   this.msec = Math.floor(diff[1] / 1000000);
   this.μsec = Math.floor((diff[1] - this.msec * 1000000) / 1000);

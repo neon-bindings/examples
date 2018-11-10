@@ -8,11 +8,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "eslint": "^5.8.0",
+    "eslint": "^5.9.0",
     "eslint-config-bliss": "^3.0.0",
     "lerna": "^3.4.3"
   },
   "eslintConfig": {
-    "extends": "bliss"
+    "extends": "bliss",
+    "rules": {
+      "no-plusplus": "off"
+    }
   }
 }

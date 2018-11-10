@@ -15,11 +15,13 @@ function lines(corpus) {
 }
 
 function skipPunc(word) {
+  // eslint-disable-next-line
   for (var i = 0, n = word.length; i < n; i++) {
     if (/[a-zA-Z]/.test(word[i])) {
       break;
     }
   }
+  // eslint-disable-next-line
   return word.substring(i);
 }
 
