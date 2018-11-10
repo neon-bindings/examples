@@ -11,3 +11,5 @@ console.log(
   returnJsArrayWithNumber(),
   returnJsArrayWithString()
 );
+
+module.exports = require('../native/index.node');

@@ -69,7 +69,7 @@ fn wc_parallel(lines: &Vec<&str>, search: &str) -> i32 {
 
 fn search(mut cx: FunctionContext) -> JsResult<JsNumber> {
     let buffer: Handle<JsBuffer> = cx.argument(0)?;
-    let string: String = cx.argument::<JsString>(0)?.value();
+    let string = cx.argument::<JsString>(1)?.value();
     let search = &string[..];
     let total = cx.borrow(&buffer, |data| {
         let corpus = str::from_utf8(data.as_slice()).ok().unwrap();

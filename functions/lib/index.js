@@ -1,5 +1,4 @@
 const {
-  hello,
   requireObjectThis,
   callJsFunction,
   constructJsFunction,
@@ -7,9 +6,10 @@ const {
 } = require('../native/index.node');
 
 console.log(
-  hello(),
   requireObjectThis(),
-  callJsFunction(),
-  constructJsFunction(),
+  callJsFunction(() => 12),
+  constructJsFunction(Date),
   returnJsFunction()
 );
+
+module.exports = require('../native/index.node');

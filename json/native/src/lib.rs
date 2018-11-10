@@ -19,11 +19,4 @@ export! {
     fn greet(user: User) -> String {
         format!("{} is {} years old", user.name, user.age)
     }
-
-    fn fibonacci(n: i32) -> i32 {
-        match n {
-            1 | 2 => 1,
-            n => fibonacci(n - 1) + fibonacci(n - 2)
-        }
-    }
 }

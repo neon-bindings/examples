@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests arguments 1`] = `[Function]`;
+
+exports[`tests arguments 2`] = `2`;
+
+exports[`tests arguments 3`] = `3`;
+
+exports[`tests arguments 4`] = `undefined`;
+
+exports[`tests arguments 5`] = `undefined`;
+
+exports[`tests arrays 1`] = `Array []`;
+
+exports[`tests arrays 2`] = `Array []`;
+
+exports[`tests arrays 3`] = `
+Array [
+  9000,
+]
+`;
+
+exports[`tests arrays 4`] = `
+Array [
+  "hello node",
+]
+`;
+
+exports[`tests classes 1`] = `User {}`;
+
+exports[`tests functions 1`] = `undefined`;
+
+exports[`tests functions 2`] = `12`;
+
+exports[`tests functions 3`] = `1970`;
+
+exports[`tests functions 4`] = `[Function]`;
+
+exports[`tests json 1`] = `"Hello, john!"`;
+
+exports[`tests objects 1`] = `
+Object {
+  "myNumberProperty": 1234,
+  "myStringProperty": "baz",
+}
+`;
+
+exports[`tests share binary data 1`] = `
+Float32Array [
+  0,
+  0,
+]
+`;
+
+exports[`tests should run hello world 1`] = `12`;
+
+exports[`tests should run primitives 1`] = `undefined`;
