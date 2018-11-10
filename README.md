@@ -5,12 +5,17 @@
 ## Table of Contents
 
 1. [hello world](https://github.com/amilajack/neon-examples/tree/master/hello-world)
-2. [electron app](https://github.com/amilajack/neon-examples/tree/master/electron-app)
-3. [word counting](https://github.com/amilajack/neon-examples/tree/master/word-counting)
-4. [fibonacci task](https://github.com/amilajack/neon-examples/tree/master/fibonacci-task)
-5. [sharing binary data](https://github.com/amilajack/neon-examples/tree/master/sharing-binary-data)
-6. [json](https://github.com/amilajack/neon-examples/tree/master/json)
-7. [classes](https://github.com/amilajack/neon-examples/tree/master/classes)
+2. [primitives](https://github.com/amilajack/neon-examples/tree/master/primitives)
+3. [arrays](https://github.com/amilajack/neon-examples/tree/master/arrays)
+4. [objects](https://github.com/amilajack/neon-examples/tree/master/objects)
+5. [arguments](https://github.com/amilajack/neon-examples/tree/master/arguments)
+6. [functions](https://github.com/amilajack/neon-examples/tree/master/functions)
+7. [word counting](https://github.com/amilajack/neon-examples/tree/master/word-counting)
+8. [fibonacci task](https://github.com/amilajack/neon-examples/tree/master/fibonacci-task)
+9. [sharing binary data](https://github.com/amilajack/neon-examples/tree/master/sharing-binary-data)
+10. [json](https://github.com/amilajack/neon-examples/tree/master/json)
+12. [classes](https://github.com/amilajack/neon-examples/tree/master/classes)
+13. [electron app](https://github.com/amilajack/neon-examples/tree/master/electron-app)
 
 ## Setup
 

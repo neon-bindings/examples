@@ -40,8 +40,9 @@ before_install:
   - nvm use ${TRAVIS_NODE_VERSION}
   - node -v
   - npm -v
-  - npm i -g yarn neon-cli lerna
+  - npm i -g yarn@latest neon-cli@latest lerna@latest
 
 script:
   - lerna bootstrap
   - lerna run install
+  - yarn lint

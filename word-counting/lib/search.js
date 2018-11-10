@@ -15,7 +15,7 @@ function lines(corpus) {
 }
 
 function skipPunc(word) {
-  for (var i = 0, n = word.length; i < n; i++) {
+  for (let i = 0, n = word.length; i < n; i++) {
     if (/[a-zA-Z]/.test(word[i])) {
       break;
     }

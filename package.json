@@ -13,6 +13,9 @@
     "lerna": "^3.4.3"
   },
   "eslintConfig": {
-    "extends": "bliss"
+    "extends": "bliss",
+    "rules": {
+      "no-plusplus": "off"
+    }
   }
 }
