@@ -22,7 +22,16 @@
 ```bash
 git clone https://github.com/amilajack/neon-examples
 cd neon-examples
+
+# Compiling and running a single example:
+cd primitives
+npm install # OR `yarn`
+node ./lib/index.js
+
+# Compiling and running all the examples:
 npm install -g lerna
 lerna bootstrap
-lerna run build
+lerna run install
+cd primitives
+node ./lib/index.js
 ```

@@ -41,6 +41,7 @@ before_install:
   - node -v
   - npm -v
   - npm i -g yarn@latest neon-cli@latest lerna@latest
+  - npm install
 
 script:
   - lerna bootstrap
