@@ -16,8 +16,9 @@
 | 8.|  [fibonacci task](https://github.com/amilajack/neon-examples/tree/master/fibonacci-task) | Computing the nth fibonacci number in Rust and passing the result to JS |
 | 9.|  [sharing binary data](https://github.com/amilajack/neon-examples/tree/master/sharing-binary-data) | Handling binary data passed from Node to Rust |
 | 10.|  [json](https://github.com/amilajack/neon-examples/tree/master/json) | Handling JSON passed between JS and Rust |
-| 12.|  [classes](https://github.com/amilajack/neon-examples/tree/master/classes) | Creation of classes |
+| 12.|  [classes](https://github.com/amilajack/neon-examples/tree/master/classes) | Creating of classes |
 | 13.|  [electron app](https://github.com/amilajack/neon-examples/tree/master/electron-app) | A simple electron app using Neon modules |
+| 14.|  Bindgen | Planned |
 
 ## Setup
 
