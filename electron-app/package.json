@@ -13,7 +13,7 @@
     "neon-cli": "^0.2.0"
   },
   "dependencies": {
-    "electron": "3.0.8",
+    "electron": "3.0.10",
     "neon-hello": "^0.1.1"
   }
 }
