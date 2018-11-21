@@ -47,10 +47,10 @@ fn return_js_function(mut cx: FunctionContext) -> JsResult<JsFunction> {
     JsFunction::new(&mut cx, add1)
 }
 
-register_module!(mut cx, {
-    cx.export_function("requireObjectThis", require_object_this)?;
-    cx.export_function("callJsFunction", call_js_function)?;
-    cx.export_function("constructJsFunction", construct_js_function)?;
-    cx.export_function("returnJsFunction", return_js_function)?;
+register_module!(mut m, {
+    m.export_function("requireObjectThis", require_object_this)?;
+    m.export_function("callJsFunction", call_js_function)?;
+    m.export_function("constructJsFunction", construct_js_function)?;
+    m.export_function("returnJsFunction", return_js_function)?;
     Ok(())
 });

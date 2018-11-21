@@ -58,11 +58,11 @@ fn default_args(mut cx: FunctionContext) -> JsResult<JsUndefined> {
     Ok(cx.undefined())
 }
 
-register_module!(mut cx, {
-    cx.export_function("printFunction", print_function)?;
-    cx.export_function("add1", add1)?;
-    cx.export_function("getArgsLen", get_args_len)?;
-    cx.export_function("argsOpt", args_opt)?;
-    cx.export_function("defaultArgs", default_args)?;
+register_module!(mut m, {
+    m.export_function("printFunction", print_function)?;
+    m.export_function("add1", add1)?;
+    m.export_function("getArgsLen", get_args_len)?;
+    m.export_function("argsOpt", args_opt)?;
+    m.export_function("defaultArgs", default_args)?;
     Ok(())
 });
