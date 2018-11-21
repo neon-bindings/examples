@@ -36,10 +36,10 @@ fn return_js_array_with_string(mut cx: FunctionContext) -> JsResult<JsArray> {
     Ok(array)
 }
 
-register_module!(mut cx, {
-    cx.export_function("convertVecToArray", convert_vec_to_array)?;
-    cx.export_function("returnJsArray", return_js_array)?;
-    cx.export_function("returnJsArrayWithNumber", return_js_array_with_number)?;
-    cx.export_function("returnJsArrayWithString", return_js_array_with_string)?;
+register_module!(mut m, {
+    m.export_function("convertVecToArray", convert_vec_to_array)?;
+    m.export_function("returnJsArray", return_js_array)?;
+    m.export_function("returnJsArrayWithNumber", return_js_array_with_number)?;
+    m.export_function("returnJsArrayWithString", return_js_array_with_string)?;
     Ok(())
 });

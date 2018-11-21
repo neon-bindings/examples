@@ -58,8 +58,8 @@ fn fibonacci_async(mut cx: FunctionContext) -> JsResult<JsUndefined> {
     Ok(cx.undefined())
 }
 
-register_module!(mut cx, {
-    cx.export_function("fibonacciSync", fibonacci_sync)?;
-    cx.export_function("fibonacci", fibonacci_async)?;
+register_module!(mut m, {
+    m.export_function("fibonacciSync", fibonacci_sync)?;
+    m.export_function("fibonacci", fibonacci_async)?;
     Ok(())
 });

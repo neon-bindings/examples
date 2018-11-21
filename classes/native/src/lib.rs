@@ -75,6 +75,6 @@ declare_types! {
     }
   }
 }
-register_module!(mut cx, {
-    cx.export_class::<JsUser>("User")
+register_module!(mut m, {
+    m.export_class::<JsUser>("User")
 });
