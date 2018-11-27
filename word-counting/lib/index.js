@@ -12,7 +12,10 @@ const wc = {
 const ROOT = path.resolve(__dirname, '..');
 const DATA = path.resolve(ROOT, 'data');
 
-const string = fs.readFileSync(path.resolve(DATA, 'shakespeare-plays.csv'), 'utf8');
+const string = fs.readFileSync(
+  path.resolve(DATA, 'shakespeare-plays.csv'),
+  'utf8'
+);
 const buffer = fs.readFileSync(path.resolve(DATA, 'shakespeare-plays.csv'));
 
 console.log(bench(() => wc.js.search(string, 'thee')));

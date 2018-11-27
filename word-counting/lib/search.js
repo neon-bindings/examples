@@ -10,8 +10,9 @@ function nthIndexOf(haystack, needle, n) {
 }
 
 function lines(corpus) {
-  return corpus.split(/\n+/)
-               .map((line) => line.substring(nthIndexOf(line, ',', 3) + 1));
+  return corpus
+    .split(/\n+/)
+    .map(line => line.substring(nthIndexOf(line, ',', 3) + 1));
 }
 
 function skipPunc(word) {
@@ -27,7 +28,9 @@ function skipPunc(word) {
 
 function matches(word, search) {
   const start = skipPunc(word);
-  let i = 0; const m = start.length; const n = search.length;
+  let i = 0;
+  const m = start.length;
+  const n = search.length;
   if (m < n) {
     return false;
   }
@@ -58,4 +61,4 @@ exports.search = function search(corpus, _search) {
     total += wcLine(ls[i], _search);
   }
   return total;
-}
+};

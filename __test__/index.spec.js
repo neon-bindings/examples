@@ -1,4 +1,5 @@
 const helloWorld = require('../hello-world');
+const threadCount = require('../thread-count');
 const primitives = require('../primitives');
 const arrays = require('../arrays');
 const objects = require('../objects');
@@ -12,7 +13,11 @@ const classes = require('../classes');
 
 describe('tests', () => {
   it('should run hello world', () => {
-    expect(helloWorld.threadingHint()).toMatchSnapshot();
+    expect(helloWorld.helloWorld()).toMatchSnapshot();
+  });
+
+  it('should run thread count', () => {
+    expect(threadCount.threadCount()).toMatchSnapshot();
   });
 
   it('should run primitives', () => {

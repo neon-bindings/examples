@@ -1,10 +1,10 @@
 [package]
-name = "hello-world"
+name = "thread-count"
 version = "0.1.0"
 build = "build.rs"
 
 [lib]
-name = "hello_world"
+name = "thread_count"
 crate-type = ["dylib"]
 
 [build-dependencies]
@@ -12,3 +12,4 @@ neon-build = "0.2"
 
 [dependencies]
 neon = "0.2"
+num_cpus = "1.4.0"
