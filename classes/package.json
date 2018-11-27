@@ -1,5 +1,5 @@
 {
-  "name": "neon-class-example",
+  "name": "classes",
   "version": "0.0.1",
   "description": "A simple example of a Neon class",
   "main": "lib/index.js",

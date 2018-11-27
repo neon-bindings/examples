@@ -1,5 +1,5 @@
 {
-  "name": "neon-binary-example",
+  "name": "sharing-binary-data",
   "version": "0.1.0",
   "description": "An example of sharing binary data between JS and Rust",
   "main": "lib/index.js",

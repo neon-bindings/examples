@@ -1,5 +1,5 @@
 {
-  "name": "neon-fibonacci-task",
+  "name": "fibonacci-task",
   "version": "0.1.0",
   "description": "",
   "main": "lib/index.js",
