@@ -1,6 +1,5 @@
 #[macro_use]
 extern crate neon;
-extern crate num_cpus;
 
 use neon::prelude::*;
 
