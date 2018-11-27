@@ -6,7 +6,7 @@
 
 |  | Example | Descrption |
 | --- | --- | --- |
-| 1.|  [hello world](https://github.com/amilajack/neon-examples/tree/master/hello-world) | Expose the `num_cups` Rust library to JS | 
+| 1.|  [hello world](https://github.com/amilajack/neon-examples/tree/master/hello-world) | Return a hello world string to Node | 
 | 2.|  [primitives](https://github.com/amilajack/neon-examples/tree/master/primitives) | Creating JS primitives in Rust |
 | 3.|  [arrays](https://github.com/amilajack/neon-examples/tree/master/arrays) | Creating and using JS arrays in Rust |
 | 4.|  [objects](https://github.com/amilajack/neon-examples/tree/master/objects) | Creating and using JS objects in Rust |
