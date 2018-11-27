@@ -1,18 +1,12 @@
 # electron-app
 
-## Setup
+A simple Electron app using a Neon package
 
-After a one-time setup of:
+## Setup
 ```bash
 npm install
-```
-
-you can run the demo with
-```bash
+# Star the app
 npm start
-```
-
-If you make changes and need to rebuild the native module, use
-```bash
+# Compile the examples. Automatically runs after install
 npm run build
 ```
