@@ -1,5 +1,5 @@
 const addon = require('../native/index.node');
 
-console.log(addon.helloWorld());
+console.log(addon.threadCount());
 
 module.exports = addon;
