@@ -7,14 +7,14 @@ use neon::prelude::*;
 // Here is a simple example of converting a rust Struct to a JS Object using JsObject:
 struct Foo {
     pub bar: u64,
-    pub baz: String
+    pub baz: String,
 }
 
 // Convert a Rust struct to a JsObject
 fn convert_struct_to_js_object(mut cx: FunctionContext) -> JsResult<JsObject> {
     let foo = Foo {
         bar: 1234,
-        baz: "baz".to_string()
+        baz: "baz".to_string(),
     };
     let object = JsObject::new(&mut cx);
     let js_string = cx.string(&foo.baz);
