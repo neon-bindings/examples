@@ -12,7 +12,7 @@ fn convert_vec_to_array(mut cx: FunctionContext) -> JsResult<JsArray> {
     // Iterate over the rust Vec and map each value in the Vec to the JS array
     for (i, obj) in vec.iter().enumerate() {
         let js_string = cx.string(obj);
-        let _  = js_array.set(&mut cx, i as u32, js_string);
+        let _ = js_array.set(&mut cx, i as u32, js_string);
     }
 
     Ok(js_array)
