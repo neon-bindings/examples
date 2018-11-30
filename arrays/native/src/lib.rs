@@ -18,13 +18,13 @@ fn convert_vec_to_array(mut cx: FunctionContext) -> JsResult<JsArray> {
     Ok(js_array)
 }
 
-fn convert_js_array_to_vec(mut cx: FunctionContext) -> JsResult<JsArray> {
+fn convert_js_array_to_vec(mut cx: FunctionContext) -> JsResult<JsNumber> {
     // Take the first argument, which must be an array
     let js_arr_handle: Handle<JsArray> = cx.argument(0)?;
     // Convert a JsArray to a Rust Vec
     let vec: Vec<Handle<JsValue>> = js_arr_handle.to_vec(&mut cx)?;
     // Return the length of the Vec to JS
-    Ok(cx.number(vec.len()))
+    Ok(cx.number(vec.len() as f64))
 }
 
 fn return_empty_js_array(mut cx: FunctionContext) -> JsResult<JsArray> {
