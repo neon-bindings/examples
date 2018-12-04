@@ -37,7 +37,7 @@ describe('tests', () => {
 
   it('should run arguments', () => {
     expect(args.printFunction(() => {})).toMatchSnapshot();
-    expect(args.add1(1)).toMatchSnapshot();
+    expect(args.add1ToArgument(1)).toMatchSnapshot();
     expect(args.getArgsLen(1, 2, 3)).toMatchSnapshot();
     expect(args.argsOpt(1)).toMatchSnapshot();
     expect(args.defaultArgs()).toMatchSnapshot();

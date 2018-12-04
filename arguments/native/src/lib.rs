@@ -11,7 +11,7 @@ fn print_function(mut cx: FunctionContext) -> JsResult<JsFunction> {
 
 // Create a function that takes an argument that must be a number,
 // add 1 to that number and then return it
-fn add1(mut cx: FunctionContext) -> JsResult<JsNumber> {
+fn add_1_to_argument(mut cx: FunctionContext) -> JsResult<JsNumber> {
     // Attempt to cast the first argument to a JsNumber. Then
     // get the value if cast is successul
     let x = cx.argument::<JsNumber>(0)?.value();
@@ -94,7 +94,7 @@ fn accepts_js_objects(mut cx: FunctionContext) -> JsResult<JsString> {
 
 register_module!(mut m, {
     m.export_function("printFunction", print_function)?;
-    m.export_function("add1", add1)?;
+    m.export_function("add1ToArgument", add_1_to_argument)?;
     m.export_function("getArgsLen", get_args_len)?;
     m.export_function("argsOpt", args_opt)?;
     m.export_function("defaultArgs", default_args)?;

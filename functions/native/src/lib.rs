@@ -43,7 +43,7 @@ fn construct_js_function(mut cx: FunctionContext) -> JsResult<JsNumber> {
 
 // Returning Functions
 // Create a function to be returned
-fn add1(mut cx: FunctionContext) -> JsResult<JsNumber> {
+fn add_1_to_argument(mut cx: FunctionContext) -> JsResult<JsNumber> {
     // Attempt to cast the first argument to a JsNumber. Then
     // get the value if cast is successul
     let x = cx.argument::<JsNumber>(0)?.value();
@@ -52,7 +52,7 @@ fn add1(mut cx: FunctionContext) -> JsResult<JsNumber> {
 
 // Then reutrn the function
 fn return_js_function(mut cx: FunctionContext) -> JsResult<JsFunction> {
-    JsFunction::new(&mut cx, add1)
+    JsFunction::new(&mut cx, add_1_to_argument)
 }
 
 register_module!(mut m, {

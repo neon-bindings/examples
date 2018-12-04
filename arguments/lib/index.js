@@ -1,6 +1,6 @@
 const {
   printFunction,
-  add1,
+  add1ToArgument,
   getArgsLen,
   argsOpt,
   defaultArgs
@@ -8,7 +8,7 @@ const {
 
 console.log(
   printFunction(() => {}),
-  add1(1),
+  add1ToArgument(1),
   getArgsLen(1, 2, 3),
   argsOpt(1),
   defaultArgs()
