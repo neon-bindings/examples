@@ -16,7 +16,7 @@
 | 8.|  [modules](https://github.com/neon-bindings/examples/tree/master/modules) | Exporting functions, classes, and values |
 | 9.|  [json](https://github.com/neon-bindings/examples/tree/master/json) | Handling JSON passed between JS and Rust |
 | 10.|  [errors](https://github.com/neon-bindings/examples/tree/master/errors) | Creating and throwing errors |
-| 11.|  [async tasks](https://github.com/neon-bindings/examples/tree/master/async-tasks) | Creating async background tasks in the Node thread pool |
+| 11.|  [async](https://github.com/neon-bindings/examples/tree/master/async) | Creating and scheduling async background tasks in Node's thread pool |
 | 12.|  [thread count](https://github.com/neon-bindings/examples/tree/master/thread-count) | Expose the `num_cups` Rust library to JS | 
 | 13.|  [fibonacci task](https://github.com/neon-bindings/examples/tree/master/fibonacci-task) | Computing the nth fibonacci number in Rust and passing the result to JS |
 | 14.|  [word counting](https://github.com/neon-bindings/examples/tree/master/word-counting) | A word counting demo in Rust and JS with benchmarks |

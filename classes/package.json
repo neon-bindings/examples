@@ -1,7 +1,6 @@
 {
   "name": "classes",
   "version": "0.0.1",
-  "description": "A simple example of a Neon class",
   "main": "lib/index.js",
   "dependencies": {
     "neon-cli": "^0.2.0"

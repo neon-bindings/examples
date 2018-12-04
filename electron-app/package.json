@@ -1,7 +1,6 @@
 {
   "name": "electron-app",
   "version": "0.1.0",
-  "description": "A simple Electron app using a Neon package",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
