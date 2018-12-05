@@ -12,7 +12,7 @@ struct User {
 }
 
 export! {
-    fn say_hello(name: String) -> String {
+    fn sayHello(name: String) -> String {
         format!("Hello, {}!", name)
     }
 

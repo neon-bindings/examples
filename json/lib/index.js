@@ -1,9 +1,9 @@
 const addon = require('../native/index.node');
 
-// console.log(addon.say_hello());
+// console.log(addon.sayHello());
 // fails: TypeError: not enough arguments
 
-console.log(addon.say_hello('john'));
+console.log(addon.sayHello('john'));
 // Hello, john!
 
 // console.log(addon.greet({ name: "afsd" }));

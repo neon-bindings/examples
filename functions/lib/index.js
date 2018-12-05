@@ -1,9 +1,11 @@
+const addon = require('../native/index.node');
+
 const {
   requireObjectThis,
   callJsFunction,
   constructJsFunction,
   returnJsFunction
-} = require('../native/index.node');
+} = addon;
 
 console.log(
   requireObjectThis(),
@@ -12,4 +14,4 @@ console.log(
   returnJsFunction()
 );
 
-module.exports = require('../native/index.node');
+module.exports = addon;

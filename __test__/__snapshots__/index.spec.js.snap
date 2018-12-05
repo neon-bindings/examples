@@ -26,7 +26,17 @@ Array [
 ]
 `;
 
+exports[`tests should run async 1`] = `17`;
+
 exports[`tests should run classes 1`] = `User {}`;
+
+exports[`tests should run errors 1`] = `[Function]`;
+
+exports[`tests should run errors 2`] = `[Function]`;
+
+exports[`tests should run fibonacci-task 1`] = `"55"`;
+
+exports[`tests should run fibonacci-task 2`] = `"55"`;
 
 exports[`tests should run functions 1`] = `undefined`;
 
@@ -39,6 +49,12 @@ exports[`tests should run functions 4`] = `[Function]`;
 exports[`tests should run hello world 1`] = `"hello world!"`;
 
 exports[`tests should run json 1`] = `"Hello, should run john!"`;
+
+exports[`tests should run modules 1`] = `[Function]`;
+
+exports[`tests should run modules 2`] = `[Function]`;
+
+exports[`tests should run modules 3`] = `"baz"`;
 
 exports[`tests should run objects 1`] = `
 Object {

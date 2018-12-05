@@ -1,6 +1,5 @@
 {
   "name": "word-counting",
-  "description": "A word count demo to showcase Neon.",
   "main": "lib/index.js",
   "dependencies": {
     "neon-cli": "^0.2.0"
