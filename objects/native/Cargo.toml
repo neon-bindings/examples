@@ -1,7 +1,6 @@
 [package]
 name = "objects"
 version = "0.1.0"
-license = "MIT"
 build = "build.rs"
 exclude = ["artifacts.json", "index.node"]
 
