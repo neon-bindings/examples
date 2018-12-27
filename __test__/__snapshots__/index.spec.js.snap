@@ -34,6 +34,51 @@ exports[`tests should run errors 1`] = `[Function]`;
 
 exports[`tests should run errors 2`] = `[Function]`;
 
+exports[`tests should run event emitter 1`] = `
+Object {
+  "a": 1,
+  "b": Object {
+    "c": Array [
+      2,
+      3,
+      Object {
+        "d": "4",
+      },
+    ],
+  },
+}
+`;
+
+exports[`tests should run event emitter 2`] = `
+Object {
+  "a": 1,
+  "b": Object {
+    "c": Array [
+      2,
+      3,
+      Object {
+        "d": "4",
+      },
+    ],
+  },
+}
+`;
+
+exports[`tests should run event emitter 3`] = `
+Object {
+  "a": 1,
+  "b": Object {
+    "c": Array [
+      2,
+      3,
+      Object {
+        "d": "4",
+      },
+    ],
+  },
+}
+`;
+
 exports[`tests should run fibonacci-task 1`] = `"55"`;
 
 exports[`tests should run fibonacci-task 2`] = `"55"`;
@@ -71,5 +116,3 @@ Float32Array [
   0,
 ]
 `;
-
-exports[`tests should run thread count 1`] = `4`;
