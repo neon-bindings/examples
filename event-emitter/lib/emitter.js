@@ -1,6 +1,5 @@
 const { EventEmitter } = require('events');
 const { promisify } = require('util');
-
 const { EventEmitter: RustChannel } = require('../native/index.node');
 
 class MyEventEmitter extends EventEmitter {
@@ -28,16 +27,20 @@ class MyEventEmitter extends EventEmitter {
 
   shutdown() {
     this.isShutdown = true;
-
     return this;
   }
 }
 
 function run() {
   const emitter = new MyEventEmitter();
-
   emitter.on('tick', ({ count }) => console.log(count));
-  setTimeout(() => emitter.shutdown(), 5000);
+  return new Promise(resolve => {
+    setTimeout(() => resolve(emitter.shutdown()), 5000);
+  });
 }
 
-run();
+if (process.env.NODE_ENV !== 'test') {
+  run();
+}
+
+module.exports = MyEventEmitter;

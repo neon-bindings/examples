@@ -11,7 +11,6 @@ function fromCallback(cb) {
 module.exports = function Server({ port = 3000 } = {}) {
   const app = express();
   const server = http.createServer(app);
-  const self = {};
 
   app.use(bodyParser.raw({ type: 'application/json' }));
 
@@ -32,18 +31,13 @@ module.exports = function Server({ port = 3000 } = {}) {
 
   app.post('/hello', ({ body }, res) => res.type('json').send(hello({ body })));
 
-  function listen() {
-    return fromCallback(cb => server.listen(port, cb));
-  }
-
-  function close() {
-    return fromCallback(cb => server.close(port, cb));
-  }
-
   return {
-    ...self,
-    listen,
-    close,
+    listen() {
+      return fromCallback(cb => server.listen(port, cb));
+    },
+    close() {
+      return fromCallback(cb => server.close(port, cb));
+    },
     get port() {
       return port;
     }
