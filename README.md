@@ -23,7 +23,7 @@
 | 15.|  [sharing binary data](https://github.com/neon-bindings/examples/tree/master/sharing-binary-data) | Handling binary data passed from Node to Rust |
 | 16.|  [electron app](https://github.com/neon-bindings/examples/tree/master/electron-app) | A simple electron app using Neon modules |
 | 17.|  [publishing modules](https://github.com/amilajack/disk-utility) | Using [`node-pre-gyp`](https://github.com/mapbox/node-pre-gyp) to build and publish binaries for multiple platforms |
-| 18.|  [event emitter](https://github.com/neon-bindings/examples/tree/master/event-emitter) | An example of creating an `EventEmitter` with Neon for [Express](https://expressjs.com) |
+| 18.|  [event emitter](https://github.com/neon-bindings/examples/tree/master/event-emitter) | An example of creating an `EventEmitter` with Neon |
 | 19.|  Bindgen | Planned |
 
 ## Setup
