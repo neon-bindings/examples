@@ -2,6 +2,7 @@
 name = "event-emitter"
 version = "0.1.0"
 build = "build.rs"
+edition = "2018"
 
 [lib]
 name = "event_emitter_example"
@@ -12,8 +13,3 @@ neon-build = "0.2"
 
 [dependencies]
 neon = "0.2"
-serde = "1"
-serde_bytes = "0.10"
-serde_derive = "1"
-serde_json = "1"
-neon-serde = { git = "https://github.com/apendleton/neon-serde", branch = "oh-point-two" }
