@@ -1,10 +1,10 @@
 [package]
-name = "neon-fibonacci-task"
+name = "neon-fibonacci-async-task"
 version = "0.1.0"
 build = "build.rs"
 
 [lib]
-name = "neon_fibonacci_task"
+name = "neon_fibonacci_async_task"
 crate-type = ["dylib"]
 
 [build-dependencies]
