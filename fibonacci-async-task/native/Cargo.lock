@@ -51,7 +51,7 @@ version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
-name = "neon-fibonacci-task"
+name = "neon-fibonacci-async-task"
 version = "0.1.0"
 dependencies = [
  "neon 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",

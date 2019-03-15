@@ -1,5 +1,5 @@
 {
-  "name": "fibonacci-task",
+  "name": "fibonacci-async-task",
   "version": "0.1.0",
   "main": "lib/index.js",
   "dependencies": {
