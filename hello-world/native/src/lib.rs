@@ -3,7 +3,7 @@ extern crate neon;
 
 use neon::prelude::*;
 
-fn hello_world(mut cx: FunctionContext) -> JsResult<JsString> {
+fn hello_world(mut cx: FunctionContext<'_>) -> JsResult<'_, JsString> {
     Ok(cx.string("hello world!"))
 }
 
