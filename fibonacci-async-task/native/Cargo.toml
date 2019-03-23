@@ -2,6 +2,7 @@
 name = "neon-fibonacci-async-task"
 version = "0.1.0"
 build = "build.rs"
+edition = "2018"
 
 [lib]
 name = "neon_fibonacci_async_task"
