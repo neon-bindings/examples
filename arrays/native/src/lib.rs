@@ -1,7 +1,5 @@
-#[macro_use]
-extern crate neon;
-
 use neon::prelude::*;
+use neon::register_module;
 
 fn convert_vec_to_array(mut cx: FunctionContext) -> JsResult<JsArray> {
     let vec: Vec<String> = Vec::with_capacity(100);

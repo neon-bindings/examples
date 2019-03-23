@@ -1,13 +1,7 @@
-#[macro_use]
-extern crate neon;
-extern crate rayon;
-
-use std::str;
-
+use std::str::{from_utf8};
 use rayon::iter::{IntoParallelIterator, ParallelIterator};
-
-use neon::prelude::JsString;
 use neon::prelude::*;
+use neon::register_module;
 
 fn lines(corpus: &str) -> Vec<&str> {
     corpus
@@ -53,7 +47,7 @@ fn wc_line(line: &str, search: &str) -> i32 {
 }
 */
 
-fn wc_sequential(lines: &Vec<&str>, search: &str) -> i32 {
+fn _wc_sequential(lines: &Vec<&str>, search: &str) -> i32 {
     lines
         .into_iter()
         .map(|line| wc_line(line, search))
@@ -72,7 +66,7 @@ fn search(mut cx: FunctionContext) -> JsResult<JsNumber> {
     let string = cx.argument::<JsString>(1)?.value();
     let search = &string[..];
     let total = cx.borrow(&buffer, |data| {
-        let corpus = str::from_utf8(data.as_slice()).ok().unwrap();
+        let corpus = from_utf8(data.as_slice()).ok().unwrap();
         wc_parallel(&lines(corpus), search)
     });
     Ok(cx.number(total))
