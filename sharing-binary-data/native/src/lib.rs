@@ -7,7 +7,7 @@ use neon::prelude::*;
 use std::mem;
 
 fn hello(mut cx: FunctionContext) -> JsResult<JsArrayBuffer> {
-    let mut buffer = JsArrayBuffer::new(&mut cx, 8)?;
+    let buffer = JsArrayBuffer::new(&mut cx, 8)?;
     // cx.borrow_mut(&mut buffer, |mut slice| {
     //     let len = slice.len();
     //     let raw = slice.as_mut_ptr();

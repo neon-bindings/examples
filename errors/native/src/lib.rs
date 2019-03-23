@@ -19,7 +19,7 @@ fn throw_error(mut cx: FunctionContext) -> JsResult<JsString> {
 
 /// Throw TypeError
 fn throw_type_error(mut cx: FunctionContext) -> JsResult<JsValue> {
-    let foo: JsResult<JsError> = cx.throw_type_error("not enough arguments");
+    let _foo: JsResult<JsError> = cx.throw_type_error("not enough arguments");
     Ok(cx.string("throw_error node").upcast())
 }
 
