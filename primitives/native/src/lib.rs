@@ -1,7 +1,5 @@
-#[macro_use]
-extern crate neon;
-
 use neon::prelude::*;
+use neon::register_module;
 
 fn primitives(mut cx: FunctionContext) -> JsResult<JsUndefined> {
     // Either use function context to create number (preferred)
@@ -30,4 +28,6 @@ fn primitives(mut cx: FunctionContext) -> JsResult<JsUndefined> {
     Ok(cx.undefined())
 }
 
-register_module!(mut m, { m.export_function("primitives", primitives) });
+register_module!(mut m, {
+    m.export_function("primitives", primitives)
+});
