@@ -1,5 +1,4 @@
 const { EventEmitter } = require('events');
-const { promisify } = require('util');
 const { EventEmitter: RustChannel } = require('../native/index.node');
 
 // The `MyEventEmitter` class provides glue code to abstract the `poll`
@@ -12,13 +11,6 @@ class MyEventEmitter extends EventEmitter {
     // Create an instance of the Neon class
     const channel = new RustChannel();
 
-    // Neon does not provide `Promise` return values from asynchronous
-    // tasks, but it does use node style callbacks that may be trivially
-    // promisified.
-    // Neon uses a reference to `this` to unwrap the Rust struct. The `poll`
-    // method is bound to `channel` to ensure access.
-    const poll = promisify(channel.poll.bind(channel));
-
     // Marks the emitter as shutdown to stop iteration of the `poll` loop
     this.isShutdown = false;
 
@@ -30,38 +22,30 @@ class MyEventEmitter extends EventEmitter {
       // until either the next event is sent on the channel or a receive
       // timeout has occurred.
       if (this.isShutdown) {
-        return channel.shutdown();
+        channel.shutdown();
+        return;
       }
 
       // Poll for data
-      return (
-        poll()
-          .then(e => {
-            // Timeout on poll, no data to emit
-            if (!e) {
-              return undefined;
-            }
+      channel.poll((err, e) => {
+        if (err) this.emit('error', err);
+        else if (e) {
+          const { event, ...data } = e;
 
-            const { event, ...data } = e;
+          // Emit the event
+          this.emit(event, data);
+        }
+        // Otherwise, timeout on poll, no data to emit
 
-            // Emit the event
-            this.emit(event, data);
-
-            return undefined;
-          })
-
-          // Emit errors
-          .catch(err => this.emit('error', err))
-
-          // Schedule the next iteration of the loop. This is performed with
-          // a `setImmediate` to extending the promise chain indefinitely
-          // and causing a memory leak.
-          .then(() => setImmediate(loop))
-      );
+        // Schedule the next iteration of the loop. This is performed with
+        // a `setImmediate` to yield to the event loop, to let JS code run
+        // and avoid a stack overflow.
+        setImmediate(loop);
+      });
     };
 
-    // Start the polling loop
-    loop();
+    // Start the polling loop on next iteration of the JS event loop to prevent zalgo.
+    setImmediate(loop);
   }
 
   // Mark the channel for shutdown
