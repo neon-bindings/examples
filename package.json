@@ -3,21 +3,20 @@
   "version": "0.1.0",
   "main": "index.js",
   "scripts": {
-    "build": "lerna run build",
     "lint": "eslint .",
-    "test": "jest ."
+    "test": "jest"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
     "eslint": "^5.11.1",
-    "eslint-config-bliss": "^3.1.2",
-    "lerna": "^3.8.0",
-    "npm": "^6.5.0"
-  },
-  "eslintConfig": {
-    "extends": "bliss",
-    "rules": {
-      "no-plusplus": "off",
-      "no-new": "off"
-    }
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-import-resolver-node": "^0.3.2",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jest": "^22.4.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "jest": "^24.5.0",
+    "prettier": "^1.16.4"
   }
 }

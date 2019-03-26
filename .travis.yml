@@ -38,12 +38,9 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CXX="g++-8"; fi
   - nvm install $TRAVIS_NODE_VERSION
   - nvm use ${TRAVIS_NODE_VERSION}
-  - node -v
-  - npm -v
-  - npm i -g yarn@latest neon-cli@latest lerna@latest
-  - npm install
+  - curl -L https://unpkg.com/@pnpm/self-installer | node
+  - pnpm i
 
 script:
-  - lerna bootstrap
-  - lerna run install
-  - yarn lint
+  - pnpm run lint
+  - pnpm m t
