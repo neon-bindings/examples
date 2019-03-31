@@ -4,7 +4,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-build-env neon build neon-hello --release",
+    "build": "electron-build-env neon build hello-world --release",
     "postinstall": "npm run build"
   },
   "devDependencies": {
@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "electron": "4.1.1",
-    "neon-hello": "^0.1.1"
+    "hello-world": "file:../hello-world"
   },
   "eslintConfig": {
     "rules": {
