@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "electron": "4.1.1",
-    "hello-world": "file:../hello-world"
+    "hello-world": "0.1.0"
   },
   "eslintConfig": {
     "rules": {
