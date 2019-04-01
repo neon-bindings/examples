@@ -28,6 +28,4 @@ fn primitives(mut cx: FunctionContext) -> JsResult<JsUndefined> {
     Ok(cx.undefined())
 }
 
-register_module!(mut m, {
-    m.export_function("primitives", primitives)
-});
+register_module!(mut m, { m.export_function("primitives", primitives) });

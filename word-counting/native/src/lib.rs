@@ -1,7 +1,7 @@
-use std::str::{from_utf8};
-use rayon::iter::{IntoParallelIterator, ParallelIterator};
 use neon::prelude::*;
 use neon::register_module;
+use rayon::iter::{IntoParallelIterator, ParallelIterator};
+use std::str::from_utf8;
 
 fn lines(corpus: &str) -> Vec<&str> {
     corpus

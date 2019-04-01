@@ -29,7 +29,7 @@ fn throw_custom_error(mut cx: FunctionContext) -> JsResult<JsError> {
         "type_error" => cx.throw_type_error("throwing a TypeError"),
         "range_error" => cx.throw_range_error("throwing a RangeError"),
         "error" => cx.throw_error("throwing an Error"),
-        _ => panic!("please pass an expected error type")
+        _ => panic!("please pass an expected error type"),
     }
 }
 
@@ -42,7 +42,7 @@ fn _create_error_obj(mut cx: FunctionContext) -> JsResult<JsError> {
         "type_error" => cx.type_error("creating a TypeError"),
         "range_error" => cx.range_error("creating a RangeError"),
         "error" => cx.error("creating an Error"),
-        _ => panic!("please pass an expected error type")
+        _ => panic!("please pass an expected error type"),
     }
 }
 

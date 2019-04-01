@@ -1,6 +1,6 @@
 use neon::register_module;
 use neon_serde::export;
-use serde_derive::{Serialize, Deserialize};
+use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
 struct User {

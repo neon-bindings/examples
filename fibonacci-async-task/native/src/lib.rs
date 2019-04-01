@@ -34,11 +34,7 @@ impl Task for FibonacciTask {
         Ok(compute(self.argument))
     }
 
-    fn complete(
-        self,
-        mut cx: TaskContext,
-        result: Result<BigUint, ()>,
-    ) -> JsResult<JsString> {
+    fn complete(self, mut cx: TaskContext, result: Result<BigUint, ()>) -> JsResult<JsString> {
         Ok(cx.string(result.unwrap().to_str_radix(10)))
     }
 }
