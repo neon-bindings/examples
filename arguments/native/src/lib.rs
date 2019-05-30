@@ -49,7 +49,7 @@ fn default_args(mut cx: FunctionContext) -> JsResult<JsUndefined> {
 
     let name = match cx.argument_opt(1) {
         Some(arg) => arg.downcast::<JsString>().or_throw(&mut cx)?.value(),
-        // Default to 12 if no value is given
+        // Default to "John Doe" if no value is given
         None => "John Doe".to_string(),
     };
 
