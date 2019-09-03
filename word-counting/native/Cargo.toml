@@ -4,7 +4,7 @@ version = "0.1.2"
 
 [lib]
 name = "word_counting_demo"
-crate-type = ["dylib"]
+crate-type = ["cdylib"]
 
 [dependencies]
 neon = "0.3.1"

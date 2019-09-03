@@ -6,7 +6,7 @@ exclude = ["artifacts.json", "index.node"]
 
 [lib]
 name = "arrays"
-crate-type = ["dylib"]
+crate-type = ["cdylib"]
 
 [build-dependencies]
 neon-build = "0.3.1"

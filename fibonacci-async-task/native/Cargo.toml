@@ -5,7 +5,7 @@ build = "build.rs"
 
 [lib]
 name = "neon_fibonacci_async_task"
-crate-type = ["dylib"]
+crate-type = ["cdylib"]
 
 [build-dependencies]
 neon-build = "0.3.1"
