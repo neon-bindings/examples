@@ -6,5 +6,8 @@ version = "0.0.1"
 name = "neon_class_example"
 crate-type = ["dylib"]
 
+[build-dependencies]
+neon-build = "0.3.1"
+
 [dependencies]
-neon = "0.2"
+neon = "0.3.1"
