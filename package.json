@@ -16,6 +16,7 @@
   "eslintConfig": {
     "extends": "bliss",
     "rules": {
+      "flowtype-errors/show-errors": "off",
       "no-plusplus": "off",
       "no-new": "off"
     }
