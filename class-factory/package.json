@@ -1,0 +1,12 @@
+{
+  "name": "class-factory",
+  "version": "0.1.0",
+  "description": "Class factories and resource pools",
+  "main": "lib/index.js",
+  "dependencies": {
+    "neon-cli": "^0.3.1"
+  },
+  "scripts": {
+    "install": "neon build --release"
+  }
+}
