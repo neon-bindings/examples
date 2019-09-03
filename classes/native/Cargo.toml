@@ -4,7 +4,7 @@ version = "0.0.1"
 
 [lib]
 name = "neon_class_example"
-crate-type = ["dylib"]
+crate-type = ["cdylib"]
 
 [build-dependencies]
 neon-build = "0.3.1"
