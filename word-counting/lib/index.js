@@ -18,8 +18,11 @@ const string = fs.readFileSync(
 );
 const buffer = fs.readFileSync(path.resolve(DATA, 'shakespeare-plays.csv'));
 
-console.log('JavaScript:    ', bench(() => wc.js.search(string, 'thee')));
+console.log('Node:    ', bench(() => wc.js.search(string, 'thee')));
 console.log('Neon:          ', bench(() => wc.neon.search(buffer, 'thee')));
-console.log('Neon(parallel):', bench(() => wc.neon.search(buffer, 'thee', true)));
+console.log(
+  'Neon(parallel):',
+  bench(() => wc.neon.search(buffer, 'thee', true))
+);
 
 module.exports = neon;
