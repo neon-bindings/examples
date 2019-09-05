@@ -46,4 +46,4 @@ before_install:
 script:
   - lerna bootstrap
   - lerna run install
-  - yarn lint
+  - yarn test

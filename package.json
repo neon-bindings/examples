@@ -5,7 +5,7 @@
   "scripts": {
     "build": "lerna run build",
     "lint": "eslint .",
-    "test": "jest ."
+    "test": "yarn lint && jest ."
   },
   "devDependencies": {
     "eslint": "^5.11.1",

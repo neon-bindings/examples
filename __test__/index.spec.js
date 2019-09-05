@@ -98,7 +98,7 @@ describe('tests', () => {
     expect(result).toMatchSnapshot();
   });
 
-  it('should run event emitter', async () => {
+  it.skip('should run event emitter', async () => {
     const performAsyncTask = () =>
       new Promise(resolve => {
         performAsyncTaskCB((err, result) => {
