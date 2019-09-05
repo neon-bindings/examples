@@ -16,8 +16,8 @@ fn throw_error(mut cx: FunctionContext) -> JsResult<JsString> {
 }
 
 /// Throw TypeError
-fn _throw_type_error(mut cx: FunctionContext) -> JsResult<JsValue> {
-    let _foo: JsResult<JsError> = cx.throw_type_error("not enough arguments");
+fn throw_type_error(mut cx: FunctionContext) -> JsResult<JsValue> {
+    let _foo: JsResult<JsError> = cx.throw_type_error("not enough arguments")?;
     Ok(cx.string("throw_error node").upcast())
 }
 
@@ -35,7 +35,7 @@ fn throw_custom_error(mut cx: FunctionContext) -> JsResult<JsError> {
 
 /// Creating error objects. This function will not throw errors. It will
 /// only create them and return them
-fn _create_error_obj(mut cx: FunctionContext) -> JsResult<JsError> {
+fn create_error_obj(mut cx: FunctionContext) -> JsResult<JsError> {
     let arg0 = cx.argument::<JsString>(0)?.value();
 
     match arg0.as_str() {
@@ -49,5 +49,7 @@ fn _create_error_obj(mut cx: FunctionContext) -> JsResult<JsError> {
 register_module!(mut m, {
     m.export_function("throwError", throw_error)?;
     m.export_function("throwCustomError", throw_custom_error)?;
+    m.export_function("throwTypeError", throw_type_error)?;
+    m.export_function("createErrorObj", create_error_obj)?;
     Ok(())
 });
