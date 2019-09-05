@@ -25,7 +25,8 @@
 | 17.|  [electron app](https://github.com/neon-bindings/examples/tree/master/electron-app) | A simple electron app using Neon modules |
 | 18.|  [publishing modules](https://github.com/amilajack/disk-utility) | Using [`node-pre-gyp`](https://github.com/mapbox/node-pre-gyp) to build and publish binaries for multiple platforms |
 | 19.|  [event emitter](https://github.com/neon-bindings/examples/tree/master/event-emitter) | An example of creating an `EventEmitter` with Neon |
-| 20.|  Bindgen | Planned |
+| 20.|  [workspace](https://github.com/neon-bindings/examples/tree/master/workspace) | An example of using Neon in a Cargo workspace |
+| 21.|  Bindgen | Planned |
 
 ## Setup
 

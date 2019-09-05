@@ -1,0 +1,18 @@
+[package]
+name = "workspace"
+version = "0.1.0"
+edition = "2018"
+build = "build.rs"
+exclude = ["artifacts.json", "index.node"]
+
+[lib]
+name = "workspace"
+crate-type = ["cdylib"]
+
+[build-dependencies]
+neon-build = { git = "https://github.com/neon-bindings/neon.git", rev = "683bf48" }
+
+[dependencies]
+# Required for `cargo test` https://github.com/neon-bindings/neon/pull/431
+neon = { git = "https://github.com/neon-bindings/neon.git", rev = "683bf48" }
+hello = { path = "hello" }
