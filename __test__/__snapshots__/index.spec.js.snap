@@ -79,9 +79,9 @@ Object {
 }
 `;
 
-exports[`tests should run fibonacci-async-task 1`] = `"55"`;
+exports[`tests should run fibonacci-task 1`] = `"55"`;
 
-exports[`tests should run fibonacci-async-task 2`] = `"55"`;
+exports[`tests should run fibonacci-task 2`] = `"55"`;
 
 exports[`tests should run functions 1`] = `undefined`;
 

@@ -32,7 +32,9 @@ matrix:
         - ELECTRON_CACHE=$HOME/.cache/electron
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 
-cache: cargo
+cache:
+  - yarn: true
+  - cargo: true
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CXX="g++-8"; fi
@@ -46,4 +48,4 @@ before_install:
 script:
   - lerna bootstrap
   - lerna run install
-  - yarn lint
+  - yarn test
