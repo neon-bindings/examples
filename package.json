@@ -10,6 +10,7 @@
   "devDependencies": {
     "eslint": "^5.11.1",
     "eslint-config-bliss": "^3.1.2",
+    "jest-cli": "^24.9.0",
     "lerna": "^3.8.0",
     "npm": "^6.5.0"
   },
