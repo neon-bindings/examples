@@ -1,7 +1,5 @@
-#[macro_use]
-extern crate neon;
-
 use neon::prelude::*;
+use neon::register_module;
 
 // Mapping a struct to a JsObject
 // Here is a simple example of converting a rust Struct to a JS Object using JsObject:

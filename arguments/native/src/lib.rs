@@ -1,7 +1,5 @@
-#[macro_use]
-extern crate neon;
-
 use neon::prelude::*;
+use neon::register_module;
 
 // Creating a function that takes a function and prints it
 fn print_function(mut cx: FunctionContext) -> JsResult<JsFunction> {

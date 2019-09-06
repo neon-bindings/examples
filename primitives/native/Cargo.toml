@@ -3,6 +3,7 @@ name = "primitives"
 version = "0.1.0"
 build = "build.rs"
 exclude = ["artifacts.json", "index.node"]
+edition = "2018"
 
 [lib]
 name = "primitives"

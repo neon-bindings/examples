@@ -6,7 +6,7 @@
 
 |  | Example | Descrption |
 | --- | --- | --- |
-| 1.|  [hello world](https://github.com/neon-bindings/examples/tree/master/hello-world) | Return a hello world string to Node | 
+| 1.|  [hello world](https://github.com/neon-bindings/examples/tree/master/hello-world) | Return a hello world string to Node |
 | 2.|  [primitives](https://github.com/neon-bindings/examples/tree/master/primitives) | Creating JS primitives in Rust |
 | 3.|  [arrays](https://github.com/neon-bindings/examples/tree/master/arrays) | Creating and using JS arrays in Rust |
 | 4.|  [objects](https://github.com/neon-bindings/examples/tree/master/objects) | Creating and using JS objects in Rust |
