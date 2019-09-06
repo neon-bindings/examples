@@ -2,6 +2,7 @@
 name = "neon-sharing-binary-data-example"
 version = "0.1.0"
 build = "build.rs"
+edition = "2018"
 
 [lib]
 name = "neon_sharing_binary_data_example"

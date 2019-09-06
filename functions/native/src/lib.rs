@@ -1,7 +1,5 @@
-#[macro_use]
-extern crate neon;
-
 use neon::prelude::*;
+use neon::register_module;
 
 // Accessing `this` of the created function. The JS equivalent would be
 // creating a function called require_object_this and setting `this.modified = true`

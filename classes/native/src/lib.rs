@@ -1,7 +1,5 @@
-#[macro_use]
-extern crate neon;
-
 use neon::prelude::*;
+use neon::{class_definition, declare_types, impl_managed, register_module};
 
 pub struct User {
     id: i32,
@@ -9,8 +7,6 @@ pub struct User {
     last_name: String,
     email: String,
 }
-
-type Unit = ();
 
 declare_types! {
   pub class JsUser for User {

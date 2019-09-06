@@ -1,6 +1,7 @@
 [package]
 name = "neon-class-example"
 version = "0.0.1"
+edition = "2018"
 
 [lib]
 name = "neon_class_example"
