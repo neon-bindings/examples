@@ -4,16 +4,16 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-build-env neon build neon-hello --release",
+    "build": "electron-build-env neon build hello-world --release",
     "postinstall": "npm run build"
   },
   "devDependencies": {
     "electron-build-env": "^0.2",
-    "neon-cli": "^0.2.0"
+    "neon-cli": "^0.3.1"
   },
   "dependencies": {
-    "electron": "3.0.10",
-    "neon-hello": "^0.1.1"
+    "electron": "4.1.1",
+    "hello-world": "0.1.0"
   },
   "eslintConfig": {
     "rules": {

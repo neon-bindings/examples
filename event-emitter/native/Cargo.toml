@@ -6,10 +6,10 @@ edition = "2018"
 
 [lib]
 name = "event_emitter_example"
-crate-type = ["dylib"]
+crate-type = ["cdylib"]
 
 [build-dependencies]
-neon-build = "0.2"
+neon-build = "0.3.1"
 
 [dependencies]
-neon = "0.2"
+neon = "0.3.1"

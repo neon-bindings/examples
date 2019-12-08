@@ -2,7 +2,7 @@
   "name": "word-counting",
   "main": "lib/index.js",
   "dependencies": {
-    "neon-cli": "^0.2.0"
+    "neon-cli": "^0.3.1"
   },
   "scripts": {
     "install": "neon build --release"

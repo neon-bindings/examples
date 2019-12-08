@@ -5,19 +5,34 @@
   "scripts": {
     "build": "lerna run build",
     "lint": "eslint .",
-    "test": "jest ."
+    "test": "yarn lint && jest ."
   },
   "devDependencies": {
     "eslint": "^5.11.1",
     "eslint-config-bliss": "^3.1.2",
-    "lerna": "^3.8.0",
+    "husky": "^3.0.5",
+    "jest-cli": "^24.9.0",
+    "lerna": "^3.13.1",
+    "lint-staged": "^9.2.5",
     "npm": "^6.5.0"
   },
   "eslintConfig": {
     "extends": "bliss",
     "rules": {
+      "flowtype-errors/show-errors": "off",
       "no-plusplus": "off",
       "no-new": "off"
     }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }

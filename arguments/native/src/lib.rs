@@ -1,7 +1,5 @@
-#[macro_use]
-extern crate neon;
-
 use neon::prelude::*;
+use neon::register_module;
 
 // Creating a function that takes a function and prints it
 fn print_function(mut cx: FunctionContext) -> JsResult<JsFunction> {
@@ -49,7 +47,7 @@ fn default_args(mut cx: FunctionContext) -> JsResult<JsUndefined> {
 
     let name = match cx.argument_opt(1) {
         Some(arg) => arg.downcast::<JsString>().or_throw(&mut cx)?.value(),
-        // Default to 12 if no value is given
+        // Default to "John Doe" if no value is given
         None => "John Doe".to_string(),
     };
 

@@ -1,10 +1,5 @@
-#[macro_use]
-extern crate neon;
-extern crate num_bigint;
-extern crate num_traits;
-
 use neon::prelude::*;
-
+use neon::register_module;
 use num_bigint::BigUint;
 use num_traits::{One, Zero};
 use std::mem::replace;
@@ -39,11 +34,7 @@ impl Task for FibonacciTask {
         Ok(compute(self.argument))
     }
 
-    fn complete<'a>(
-        self,
-        mut cx: TaskContext<'a>,
-        result: Result<BigUint, ()>,
-    ) -> JsResult<JsString> {
+    fn complete(self, mut cx: TaskContext, result: Result<BigUint, ()>) -> JsResult<JsString> {
         Ok(cx.string(result.unwrap().to_str_radix(10)))
     }
 }

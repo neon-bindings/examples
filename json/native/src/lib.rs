@@ -1,9 +1,6 @@
-#[macro_use]
-extern crate neon;
-#[macro_use]
-extern crate neon_serde;
-#[macro_use]
-extern crate serde_derive;
+use neon::register_module;
+use neon_serde::export;
+use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
 struct User {

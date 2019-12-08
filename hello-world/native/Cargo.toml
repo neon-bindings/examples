@@ -2,13 +2,14 @@
 name = "hello-world"
 version = "0.1.0"
 build = "build.rs"
+edition = "2018"
 
 [lib]
 name = "hello_world"
-crate-type = ["dylib"]
+crate-type = ["cdylib"]
 
 [build-dependencies]
-neon-build = "0.2"
+neon-build = "0.3.1"
 
 [dependencies]
-neon = "0.2"
+neon = "0.3.1"

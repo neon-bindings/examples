@@ -1,12 +1,11 @@
-#[macro_use]
-extern crate neon;
-
 use neon::prelude::*;
+use neon::{class_definition, declare_types, impl_managed, register_module};
 
 fn hello(mut cx: FunctionContext) -> JsResult<JsString> {
     Ok(cx.string("hello node"))
 }
 
+#[allow(dead_code)]
 pub struct User {
     id: i32,
     first_name: String,

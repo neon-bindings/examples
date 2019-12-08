@@ -4,16 +4,16 @@ matrix:
   include:
     - os: osx
       language: rust
-      rust: nightly-2018-10-12
+      rust: nightly-2019-09-01
       env:
-        - TRAVIS_NODE_VERSION="11"
+        - TRAVIS_NODE_VERSION="12"
         - ELECTRON_CACHE=$HOME/.cache/electron
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
     - os: linux
       language: rust
-      rust: nightly-2018-10-12
+      rust: nightly-2019-09-01
       env:
-        - TRAVIS_NODE_VERSION="11"
+        - TRAVIS_NODE_VERSION="12"
         - ELECTRON_CACHE=$HOME/.cache/electron
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
       addons:
@@ -26,13 +26,15 @@ matrix:
             - g++-multilib
     - os: windows
       language: rust
-      rust: nightly-2018-10-12
+      rust: nightly-2019-09-01
       env:
-        - TRAVIS_NODE_VERSION="11"
+        - TRAVIS_NODE_VERSION="12"
         - ELECTRON_CACHE=$HOME/.cache/electron
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 
-cache: cargo
+cache:
+  - yarn: true
+  - cargo: true
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CXX="g++-8"; fi
@@ -46,4 +48,4 @@ before_install:
 script:
   - lerna bootstrap
   - lerna run install
-  - yarn lint
+  - yarn test

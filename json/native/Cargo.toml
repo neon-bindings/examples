@@ -3,16 +3,17 @@ name = "neon-serde-example"
 version = "0.1.0"
 build = "build.rs"
 exclude = ["artifacts.json", "index.node"]
+edition = "2018"
 
 [lib]
 name = "neon_serde_example"
-crate-type = ["dylib"]
+crate-type = ["cdylib"]
 
 [build-dependencies]
-neon-build = "0.2.0"
+neon-build = "0.3.1"
 
 [dependencies]
-neon = "0.2.0"
-neon-serde = "0.1.1"
+neon = "0.3.1"
+neon-serde = "0.2.0"
 serde_derive = "1.0.80"
 serde = "1.0.80"
