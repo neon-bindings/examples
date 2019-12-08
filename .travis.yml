@@ -1,6 +1,4 @@
 matrix:
-  allow_failures:
-    - os: windows
   include:
     - os: osx
       language: rust
@@ -38,7 +36,7 @@ cache:
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CXX="g++-8"; fi
-  - nvm install $TRAVIS_NODE_VERSION
+  - nvm install ${TRAVIS_NODE_VERSION}
   - nvm use ${TRAVIS_NODE_VERSION}
   - node -v
   - npm -v
