@@ -36,6 +36,8 @@ cache:
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CXX="g++-8"; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export NVS_HOME=$ProgramData/nvs && git clone --single-branch https://github.com/jasongin/nvs $NVS_HOME; fi
+  - nvs add $TRAVIS_NODE_VERSION && nvs use $TRAVIS_NODE_VERSION
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]];
     then nvs install 13 && nvs use 13;
     else nvm install 13 && nvm use 13;
