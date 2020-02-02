@@ -6,7 +6,7 @@
   "scripts": {
     "build": "lerna run build",
     "lint": "eslint .",
-    "test": "yarn lint && jest ."
+    "test": "npm run lint && jest ."
   },
   "devDependencies": {
     "eslint": "^6.8.0",
@@ -35,8 +35,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint --fix",
-      "git add"
+      "eslint --fix"
     ]
   }
 }

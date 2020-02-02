@@ -33,7 +33,7 @@ matrix:
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 
 cache:
-  - yarn: true
+  - npm: true
   - cargo: true
 
 before_install:
@@ -42,10 +42,10 @@ before_install:
   - nvm use ${TRAVIS_NODE_VERSION}
   - node -v
   - npm -v
-  - npm i -g yarn@latest neon-cli@latest lerna@latest
+  - npm i -g neon-cli@latest lerna@latest
   - npm install
 
 script:
   - lerna bootstrap
   - lerna run install
-  - yarn test
+  - npm test
