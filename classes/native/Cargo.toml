@@ -2,13 +2,15 @@
 name = "neon-class-example"
 version = "0.0.1"
 edition = "2018"
+build = "build.rs"
+exclude = ["artifacts.json", "index.node"]
 
 [lib]
 name = "neon_class_example"
 crate-type = ["cdylib"]
 
 [build-dependencies]
-neon-build = "0.3.1"
+neon-build = "0.3.3"
 
 [dependencies]
-neon = "0.3.1"
+neon = "0.3.3"

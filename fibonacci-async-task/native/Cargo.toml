@@ -9,9 +9,9 @@ name = "neon_fibonacci_async_task"
 crate-type = ["cdylib"]
 
 [build-dependencies]
-neon-build = "0.3.1"
+neon-build = "0.3.3"
 
 [dependencies]
-neon = "0.3.1"
+neon = "0.3.3"
 num-bigint = "0.2"
 num-traits = "0.2"

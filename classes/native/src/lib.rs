@@ -1,5 +1,5 @@
 use neon::prelude::*;
-use neon::{class_definition, declare_types, impl_managed, register_module};
+use neon::{declare_types, register_module};
 
 pub struct User {
     id: i32,

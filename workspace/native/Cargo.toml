@@ -10,9 +10,8 @@ name = "workspace"
 crate-type = ["cdylib"]
 
 [build-dependencies]
-neon-build = { git = "https://github.com/neon-bindings/neon.git", rev = "683bf48" }
+neon-build = "0.3.3"
 
 [dependencies]
-# Required for `cargo test` https://github.com/neon-bindings/neon/pull/431
-neon = { git = "https://github.com/neon-bindings/neon.git", rev = "683bf48" }
+neon = "0.3.3"
 hello = { path = "hello" }

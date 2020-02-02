@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "main": "lib/index.js",
   "dependencies": {
-    "neon-cli": "^0.3.1"
+    "neon-cli": "^0.3.3"
   },
   "scripts": {
-    "install": "neon build --release"
+    "install": "neon build"
   }
 }

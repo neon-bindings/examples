@@ -1,5 +1,5 @@
 use neon::prelude::*;
-use neon::{class_definition, declare_types, impl_managed, register_module};
+use neon::{declare_types, register_module};
 
 fn hello(mut cx: FunctionContext) -> JsResult<JsString> {
     Ok(cx.string("hello node"))
