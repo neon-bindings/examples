@@ -2,6 +2,7 @@
   "name": "examples",
   "version": "0.1.0",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "build": "lerna run build",
     "lint": "eslint .",
@@ -16,6 +17,9 @@
     "lint-staged": "^9.2.5",
     "npm": "^6.5.0"
   },
+  "workspaces": [
+    "./*"
+  ],
   "eslintConfig": {
     "extends": "bliss",
     "rules": {
