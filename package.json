@@ -14,7 +14,10 @@
   },
   "workspaces": {
     "packages": ["./*"],
-    "nohoist": ["electron-app/@amilajack/neon-hello", "**/neon-cli"]
+    "nohoist": [
+      "electron-app/@amilajack/neon-hello",
+      "**/neon-cli"
+    ]
   },
   "eslintConfig": {
     "extends": "bliss",

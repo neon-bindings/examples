@@ -7,7 +7,7 @@
     "neon-cli": "^0.3.3"
   },
   "scripts": {
-    "install": "neon build",
+    "install": "neon build --release",
     "version": "neon build --release"
   },
   "devDependencies": {
