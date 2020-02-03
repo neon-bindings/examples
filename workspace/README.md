@@ -31,6 +31,6 @@ possible for a workspace to include multiple neon modules.
 ```sh
 cargo check
 cargo test
-npm i
+npm install
 node .
 ```

@@ -1,7 +1,6 @@
 {
   "private": true,
   "scripts": {
-    "build": "lerna run build",
     "lint": "eslint .",
     "spec": "jest .",
     "test": "yarn lint && yarn spec"
@@ -11,9 +10,7 @@
     "eslint-config-bliss": "^4.6.0",
     "husky": "^4.2.1",
     "jest": "^25.1.0",
-    "lerna": "^3.20.2",
-    "lint-staged": "^10.0.7",
-    "npm": "^6.13.7"
+    "lint-staged": "^10.0.7"
   },
   "workspaces": {
     "packages": ["./*"],

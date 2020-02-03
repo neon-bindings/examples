@@ -34,15 +34,8 @@
 git clone https://github.com/neon-bindings/examples
 cd neon-examples
 
-# Compiling and running a single example:
-cd primitives
-npm install # OR `yarn`
-node ./lib/index.js
-
-# Compiling and running all the examples:
-npm install -g yarn
-lerna bootstrap
-lerna run install
+# Compile and run an example:
+yarn
 cd primitives
 node ./lib/index.js
 ```
