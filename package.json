@@ -6,7 +6,8 @@
   "scripts": {
     "build": "lerna run build",
     "lint": "eslint .",
-    "test": "npm run lint && jest ."
+    "spec": "jest .",
+    "test": "npm run lint && npm run spec"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
