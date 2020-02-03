@@ -6,14 +6,14 @@ matrix:
       language: rust
       rust: nightly-2019-09-01
       env:
-        - TRAVIS_NODE_VERSION="12"
+        - TRAVIS_NODE_VERSION="13"
         - ELECTRON_CACHE=$HOME/.cache/electron
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
     - os: linux
       language: rust
       rust: nightly-2019-09-01
       env:
-        - TRAVIS_NODE_VERSION="12"
+        - TRAVIS_NODE_VERSION="13"
         - ELECTRON_CACHE=$HOME/.cache/electron
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
       addons:
@@ -28,7 +28,7 @@ matrix:
       language: rust
       rust: nightly-2019-09-01
       env:
-        - TRAVIS_NODE_VERSION="12"
+        - TRAVIS_NODE_VERSION="13"
         - ELECTRON_CACHE=$HOME/.cache/electron
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 
