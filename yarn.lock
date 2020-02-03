@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@amilajack/neon-hello@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@amilajack/neon-hello/-/neon-hello-1.0.1.tgz#95c40739e452bf1ca091d7092bbaff600d04693a"
-  integrity sha512-UUiZhdS7pHMX5l9njbotC2DtZ+FhF6cPtTa1pLOeLnl03F0/wWHgkBwyyQ6J19YTfqum2quJqbXNWC/ePkG8YQ==
+"@amilajack/neon-hello@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@amilajack/neon-hello/-/neon-hello-1.0.2.tgz#cfee008d151ced7b4d8ff670bb861f7b1098d939"
+  integrity sha512-/vIU/5ojJZ+wSHkhjvpjW52vHyegMsxBFbJuFRdhnyjGff1bgwR7wiCiHFrpo1rrxuvGHHLA/wduCqR6U6PIxQ==
   dependencies:
     neon-cli "^0.3.3"
 

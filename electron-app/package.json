@@ -13,7 +13,7 @@
     "neon-cli": "^0.3.3"
   },
   "dependencies": {
-    "@amilajack/neon-hello": "^1.0.1",
+    "@amilajack/neon-hello": "^1.0.2",
     "electron": "^7.1.11"
   },
   "eslintConfig": {
