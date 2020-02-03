@@ -4,8 +4,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-build-env neon build hello-world",
-    "postinstall": "npm run build"
+    "install": "electron-build-env neon build hello-world",
+    "version": "electron-build-env neon build hello-world --release"
   },
   "devDependencies": {
     "electron-build-env": "^0.2.0",
