@@ -1,31 +1,28 @@
 {
-  "name": "examples",
-  "version": "0.1.0",
-  "main": "index.js",
   "private": true,
   "scripts": {
     "build": "lerna run build",
     "lint": "eslint .",
     "spec": "jest .",
-    "test": "npm run lint && npm run spec"
+    "test": "yarn lint && yarn spec"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-bliss": "^4.6.0",
     "husky": "^4.2.1",
-    "jest-cli": "^25.1.0",
+    "jest": "^25.1.0",
     "lerna": "^3.20.2",
     "lint-staged": "^10.0.7",
     "npm": "^6.13.7"
   },
-  "workspaces": [
-    "./*"
-  ],
+  "workspaces": {
+    "packages": ["./*"],
+    "nohoist": ["electron-app/@amilajack/neon-hello"]
+  },
   "eslintConfig": {
     "extends": "bliss",
     "rules": {
       "flowtype-errors/show-errors": "off",
-      "no-plusplus": "off",
       "no-new": "off"
     }
   },

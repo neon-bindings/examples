@@ -37,8 +37,8 @@ describe('tests', () => {
 
   it('should run objects', () => {
     expect(objects.convertStructToJsObject()).toEqual({
-      "myNumberProperty": 1234,
-      "myStringProperty": "baz",
+      myNumberProperty: 1234,
+      myStringProperty: 'baz'
     });
   });
 
@@ -62,7 +62,9 @@ describe('tests', () => {
   });
 
   it('should run share binary data', () => {
-    expect(new Float32Array(sharingBinaryData.hello())).toEqual(new Float32Array([0, 0]));
+    expect(new Float32Array(sharingBinaryData.hello())).toEqual(
+      new Float32Array([0, 0])
+    );
   });
 
   it('should run classes', () => {
@@ -89,7 +91,9 @@ describe('tests', () => {
 
   it('should run errors', () => {
     expect(() => errors.throwError()).toThrow('');
-    expect(() => errors.throwCustomError('type_error')).toThrow('throwing a TypeError');
+    expect(() => errors.throwCustomError('type_error')).toThrow(
+      'throwing a TypeError'
+    );
   });
 
   it('should run async', async () => {

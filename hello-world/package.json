@@ -1,5 +1,5 @@
 {
-  "name": "hello-world",
+  "name": "neon-hello-world",
   "version": "0.1.0",
   "main": "lib/index.js",
   "dependencies": {
@@ -8,5 +8,8 @@
   "scripts": {
     "install": "neon build",
     "version": "neon build --release"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0"
   }
 }

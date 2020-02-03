@@ -40,7 +40,7 @@ npm install # OR `yarn`
 node ./lib/index.js
 
 # Compiling and running all the examples:
-npm install -g lerna
+npm install -g yarn
 lerna bootstrap
 lerna run install
 cd primitives
