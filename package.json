@@ -16,6 +16,7 @@
     "packages": ["./*"],
     "nohoist": [
       "electron-app/@amilajack/neon-hello",
+      "electron-app/electron-build-env",
       "**/neon-cli"
     ]
   },
