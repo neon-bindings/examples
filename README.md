@@ -1,6 +1,6 @@
 # neon-examples
 
-[![Build Status](https://travis-ci.org/neon-bindings/examples.svg?branch=master)](https://travis-ci.org/neon-bindings/examples)
+![Github Actions](https://github.com/amilajack/neon-hello/workflows/Test/badge.svg?branch=master)
 
 ## Table of Contents
 
