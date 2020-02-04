@@ -1,9 +1,9 @@
 use neon::prelude::*;
 use neon::register_module;
 
-/// Rust panics will throw an Error in Node
-/// Note that it is recommended that you throw errors as demonstrated
-/// in the context like the examples below
+// Rust panics will throw an Error in Node
+// Note that it is recommended that you throw errors as demonstrated
+// in the context like the examples below
 fn throw_error(mut cx: FunctionContext) -> JsResult<JsString> {
     // Get the value of the first argument and assert that it is a string
     let arg0 = cx.argument::<JsString>(0)?.value();
@@ -17,7 +17,7 @@ fn throw_error(mut cx: FunctionContext) -> JsResult<JsString> {
     Ok(cx.string("hello to you too!"))
 }
 
-/// Throw TypeError
+// Throw TypeError
 fn throw_type_error(mut cx: FunctionContext) -> JsResult<JsValue> {
     let _foo: JsResult<JsError> = cx.throw_type_error("not enough arguments")?;
     Ok(cx.string("throw_error node").upcast())
@@ -32,7 +32,7 @@ fn throw_if_string_not_includes_foo(mut cx: FunctionContext) -> JsResult<JsValue
     Ok(cx.string("The given string has 'foo'!").upcast())
 }
 
-/// Throw custom errors
+// Throw custom errors
 fn throw_custom_error(mut cx: FunctionContext) -> JsResult<JsError> {
     let arg0 = cx.argument::<JsString>(0)?.value();
 
@@ -44,8 +44,8 @@ fn throw_custom_error(mut cx: FunctionContext) -> JsResult<JsError> {
     }
 }
 
-/// Creating error objects. This function will not throw errors. It will
-/// only create them and return them
+// Creating error objects. This function will not throw errors. It will
+// only create them and return them
 fn create_error_obj(mut cx: FunctionContext) -> JsResult<JsError> {
     let arg0 = cx.argument::<JsString>(0)?.value();
 

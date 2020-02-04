@@ -1,6 +1,6 @@
 # neon-examples
 
-[![Build Status](https://travis-ci.org/neon-bindings/examples.svg?branch=master)](https://travis-ci.org/neon-bindings/examples)
+![Github Actions](https://github.com/amilajack/neon-hello/workflows/Test/badge.svg?branch=master)
 
 ## Table of Contents
 
@@ -33,16 +33,9 @@
 ```bash
 git clone https://github.com/neon-bindings/examples
 cd neon-examples
+yarn
 
-# Compiling and running a single example:
-cd primitives
-npm install # OR `yarn`
-node ./lib/index.js
-
-# Compiling and running all the examples:
-npm install -g lerna
-lerna bootstrap
-lerna run install
+# Compile and run an example:
 cd primitives
 node ./lib/index.js
 ```

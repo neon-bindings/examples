@@ -1,6 +1,6 @@
 function nthIndexOf(haystack, needle, n) {
   let index = -1;
-  for (let i = 0; i < n; i++) {
+  for (let i = 0; i < n; i += 1) {
     index = haystack.indexOf(needle, index + 1);
     if (index < 0) {
       return -1;
@@ -17,7 +17,7 @@ function lines(corpus) {
 
 function skipPunc(word) {
   // eslint-disable-next-line
-  for (var i = 0, n = word.length; i < n; i++) {
+  for (var i = 0, n = word.length; i < n; i+=1) {
     if (/[a-zA-Z]/.test(word[i])) {
       break;
     }
@@ -38,7 +38,7 @@ function matches(word, search) {
     if (start[i].toLowerCase() !== search[i]) {
       return false;
     }
-    i++;
+    i += 1;
   }
   return i === m || !/[a-zA-Z]/.test(start[i]);
 }
@@ -46,9 +46,9 @@ function matches(word, search) {
 function wcLine(line, search) {
   const words = line.split(' ');
   let total = 0;
-  for (let i = 0, n = words.length; i < n; i++) {
+  for (let i = 0, n = words.length; i < n; i += 1) {
     if (matches(words[i], search)) {
-      total++;
+      total += 1;
     }
   }
   return total;
@@ -57,7 +57,7 @@ function wcLine(line, search) {
 exports.search = function search(corpus, _search) {
   const ls = lines(corpus);
   let total = 0;
-  for (let i = 0, n = ls.length; i < n; i++) {
+  for (let i = 0, n = ls.length; i < n; i += 1) {
     total += wcLine(ls[i], _search);
   }
   return total;

@@ -10,7 +10,7 @@ name = "objects"
 crate-type = ["cdylib"]
 
 [build-dependencies]
-neon-build = "0.3.1"
+neon-build = "0.3.3"
 
 [dependencies]
-neon = "0.3.1"
+neon = "0.3.3"

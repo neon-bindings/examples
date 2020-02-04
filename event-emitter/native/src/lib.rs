@@ -8,29 +8,29 @@ use neon::object::Object;
 use neon::result::JsResult;
 use neon::task::Task;
 use neon::types::{JsFunction, JsUndefined, JsValue};
-use neon::{class_definition, declare_types, impl_managed, register_module};
+use neon::{declare_types, register_module};
 
-/// Represents the data that will be received by the `poll` method. It may
-/// include different types of data or be replaced with a more simple type,
-/// e.g., `Vec<u8>`.
+// Represents the data that will be received by the `poll` method. It may
+// include different types of data or be replaced with a more simple type,
+// e.g., `Vec<u8>`.
 pub enum Event {
     Tick { count: f64 },
 }
 
-/// Placeholder to represent work being done on a Rust thread. It could be
-/// reading from a socket or any other long running task.
-///
-/// Accepts a shutdown channel `shutdown_rx` as an argument. Allows graceful
-/// for graceful shutdown by reading from this channel. Shutdown may also be
-/// accomplished by waiting for a failed `send` which only occurs when the
-/// receiver has hung-up. However, the shutdown channel pattern allows for
-/// more control.
-///
-/// Returns a `Receiver` channel with the data. This is the channel that will
-/// be read by the `poll` method.
-///
-/// It's also useful to note that the `tx` channel created may be cloned if
-/// there are multiple threads that produce data to be consumed by Neon.
+// Placeholder to represent work being done on a Rust thread. It could be
+// reading from a socket or any other long running task.
+//
+// Accepts a shutdown channel `shutdown_rx` as an argument. Allows graceful
+// for graceful shutdown by reading from this channel. Shutdown may also be
+// accomplished by waiting for a failed `send` which only occurs when the
+// receiver has hung-up. However, the shutdown channel pattern allows for
+// more control.
+//
+// Returns a `Receiver` channel with the data. This is the channel that will
+// be read by the `poll` method.
+//
+// It's also useful to note that the `tx` channel created may be cloned if
+// there are multiple threads that produce data to be consumed by Neon.
 fn event_thread(shutdown_rx: mpsc::Receiver<()>) -> mpsc::Receiver<Event> {
     // Create sending and receiving channels for the event data
     let (tx, events_rx) = mpsc::channel();
@@ -68,22 +68,22 @@ fn event_thread(shutdown_rx: mpsc::Receiver<()>) -> mpsc::Receiver<Event> {
     events_rx
 }
 
-/// Reading from a channel `Receiver` is a blocking operation. This struct
-/// wraps the data required to perform a read asynchronously from a libuv
-/// thread.
+// Reading from a channel `Receiver` is a blocking operation. This struct
+// wraps the data required to perform a read asynchronously from a libuv
+// thread.
 pub struct EventEmitterTask(Arc<Mutex<mpsc::Receiver<Event>>>);
 
-/// Implementation of a neon `Task` for `EventEmitterTask`. This task reads
-/// from the events channel and calls a JS callback with the data.
+// Implementation of a neon `Task` for `EventEmitterTask`. This task reads
+// from the events channel and calls a JS callback with the data.
 impl Task for EventEmitterTask {
     type Output = Option<Event>;
     type Error = String;
     type JsEvent = JsValue;
 
-    /// The work performed on the `libuv` thread. First acquire a lock on
-    /// the receiving thread and then return the received data.
-    /// In practice, this should never need to wait for a lock since it
-    /// should only be executed one at a time by the `EventEmitter` class.
+    // The work performed on the `libuv` thread. First acquire a lock on
+    // the receiving thread and then return the received data.
+    // In practice, this should never need to wait for a lock since it
+    // should only be executed one at a time by the `EventEmitter` class.
     fn perform(&self) -> Result<Self::Output, Self::Error> {
         let rx = self
             .0
@@ -98,9 +98,9 @@ impl Task for EventEmitterTask {
         }
     }
 
-    /// After the `perform` method has returned, the `complete` method is
-    /// scheduled on the main thread. It is responsible for converting the
-    /// Rust data structure into a JS object.
+    // After the `perform` method has returned, the `complete` method is
+    // scheduled on the main thread. It is responsible for converting the
+    // Rust data structure into a JS object.
     fn complete(
         self,
         mut cx: TaskContext,
@@ -133,7 +133,7 @@ impl Task for EventEmitterTask {
     }
 }
 
-/// Rust struct that holds the data required by the `JsEventEmitter` class.
+// Rust struct that holds the data required by the `JsEventEmitter` class.
 pub struct EventEmitter {
     // Since the `Receiver` is sent to a thread and mutated, it must be
     // `Send + Sync`. Since, correct usage of the `poll` interface should
@@ -145,9 +145,9 @@ pub struct EventEmitter {
     shutdown: mpsc::Sender<()>,
 }
 
-/// Implementation of the `JsEventEmitter` class. This is the only public
-/// interface of the Rust code. It exposes the `poll` and `shutdown` methods
-/// to JS.
+// Implementation of the `JsEventEmitter` class. This is the only public
+// interface of the Rust code. It exposes the `poll` and `shutdown` methods
+// to JS.
 declare_types! {
     pub class JsEventEmitter for EventEmitter {
         // Called by the `JsEventEmitter` constructor
@@ -197,7 +197,7 @@ declare_types! {
     }
 }
 
-/// Expose the neon objects as a node module
+// Expose the neon objects as a node module
 register_module!(mut cx, {
     // Expose the `JsEventEmitter` class as `EventEmitter`.
     cx.export_class::<JsEventEmitter>("EventEmitter")?;
