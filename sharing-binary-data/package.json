@@ -6,8 +6,7 @@
     "neon-cli": "^0.3.3"
   },
   "scripts": {
-    "install": "neon build --release",
-    "version": "neon build --release"
+    "install": "neon build --release"
   },
   "devDependencies": {
     "eslint": "^6.8.0"

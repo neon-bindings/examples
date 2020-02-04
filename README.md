@@ -33,9 +33,9 @@
 ```bash
 git clone https://github.com/neon-bindings/examples
 cd neon-examples
+yarn
 
 # Compile and run an example:
-yarn
 cd primitives
 node ./lib/index.js
 ```
