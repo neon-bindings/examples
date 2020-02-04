@@ -25,7 +25,7 @@ describe('tests', () => {
   });
 
   it('should run primitives', () => {
-    primitives.primitives();
+    expect(primitives.primitives()).toEqual(undefined);
   });
 
   it('should run arrays', () => {
@@ -69,7 +69,11 @@ describe('tests', () => {
 
   it('should run classes', () => {
     const { User } = classes;
-    new User(0, 'John', 'Doe', 'johndoe@gmail.com');
+    const user = new User(0, 'John', 'Doe', 'johndoe@gmail.com');
+    expect(user.get('id')).toEqual(0);
+    expect(user.get('first_name')).toEqual('John');
+    expect(user.get('last_name')).toEqual('Doe');
+    expect(user.get('email')).toEqual('johndoe@gmail.com');
   });
 
   it('should run fibonacci-task', async () => {

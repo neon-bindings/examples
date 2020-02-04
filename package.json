@@ -24,6 +24,7 @@
     "extends": "bliss",
     "rules": {
       "flowtype-errors/show-errors": "off",
+      "no-console": "off",
       "no-new": "off"
     }
   },
