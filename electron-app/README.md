@@ -4,9 +4,9 @@ A simple Electron app using a Neon package
 
 ## Setup
 ```bash
-npm install
+yarn
 # Start the app
-npm start
+yarn start
 # Compile the examples. Automatically runs after install
-npm run build
+yarn build
 ```

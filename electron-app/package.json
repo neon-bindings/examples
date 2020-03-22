@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "main": "main.js",
   "scripts": {
+    "build": "electron-build-env neon build @amilajack/neon-hello --release",
+    "install": "yarn build",
     "start": "electron .",
-    "install": "electron-build-env neon build @amilajack/neon-hello --release",
-    "version": "electron-build-env neon build @amilajack/neon-hello --release"
+    "version": "yarn build"
   },
   "devDependencies": {
     "electron-build-env": "^0.2.0",
