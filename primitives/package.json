@@ -1,9 +1,9 @@
 {
   "name": "primitives",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "lib/index.js",
   "dependencies": {
-    "neon-cli": "^0.3.3"
+    "neon-cli": "^0.4.0"
   },
   "scripts": {
     "install": "neon build --release"
