@@ -10,7 +10,7 @@ name = "primitives"
 crate-type = ["cdylib"]
 
 [build-dependencies]
-neon-build = "0.4.0"
+neon-build = "0.3.3"
 
 [dependencies]
-neon = "0.4.0"
+neon = "0.3.3"
