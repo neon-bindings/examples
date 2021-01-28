@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@amilajack/neon-hello": "^1.0.2",
-    "electron": "^7.2.4"
+    "electron": "^9.4.0"
   },
   "eslintConfig": {
     "rules": {
