@@ -1,5 +1,7 @@
 use neon::prelude::*;
 use neon::register_module;
+use std::fs::File;
+use std::io::prelude::*;
 
 // Rust panics will throw an Error in Node
 // Note that it is recommended that you throw errors as demonstrated
@@ -57,11 +59,25 @@ fn create_error_obj(mut cx: FunctionContext) -> JsResult<JsError> {
     }
 }
 
+// Translate library-specific errors to JavaScript errors
+fn translate_error(mut cx: FunctionContext) -> JsResult<JsUndefined> {
+    let mut file =
+        File::create("hello.txt").or_else(|_| cx.throw_error("failed to create file"))?;
+    file.write_all(b"Hello, world!")
+        .or_else(|_| cx.throw_error("failed to write to file"))?;
+
+    Ok(cx.undefined())
+}
+
 register_module!(mut m, {
     m.export_function("throwError", throw_error)?;
-    m.export_function("throwIfStringNotIncludesFoo", throw_if_string_not_includes_foo)?;
+    m.export_function(
+        "throwIfStringNotIncludesFoo",
+        throw_if_string_not_includes_foo,
+    )?;
     m.export_function("throwCustomError", throw_custom_error)?;
     m.export_function("throwTypeError", throw_type_error)?;
     m.export_function("createErrorObj", create_error_obj)?;
+    m.export_function("translateError", translate_error)?;
     Ok(())
 });
