@@ -1,0 +1,14 @@
+{
+  "name": "napi-reqwest-async",
+  "version": "0.1.0",
+  "description": "",
+  "main": "lib/index.js",
+  "author": "Chris Allen <chrisa@bitemyapp.com>",
+  "license": "MIT",
+  "dependencies": {
+    "neon-cli": "^0.7.1"
+  },
+  "scripts": {
+    "install": "neon build"
+  }
+}
