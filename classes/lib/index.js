@@ -7,6 +7,6 @@ const email = "johndoe@gmail.com";
 
 let user = new User(0, "John", "Doe", email);
 
-assert.strictEqual(user.email, email);
+assert.strictEqual(user.get("email"), email);
 
 module.exports = addon;
