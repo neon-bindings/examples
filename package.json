@@ -6,7 +6,7 @@
     "example": "examples"
   },
   "scripts": {
-    "test": "pnpm test -r"
+    "test": "npm test --workspace=*"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/neon-bindings/examples/issues"
   },
-  "homepage": "https://github.com/neon-bindings/examples"
+  "homepage": "https://github.com/neon-bindings/examples",
+  "workspaces": [
+    "examples/*"
+  ]
 }

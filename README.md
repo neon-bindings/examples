@@ -22,19 +22,21 @@ All examples are for [`napi-backend`][napi-migration]. For examples using `legac
 
 ### Setup
 
-[`pnpm`](https://www.npmjs.com/package/pnpm) provides monorepo workspace tooling. It is _not_ a requirement of Neon projects and is only used for building and testing the collection of examples as a single unit.
+The `examples` repository uses the npm 7 [workspaces] feature.
+
+[workspaces]: https://docs.npmjs.com/cli/v7/using-npm/workspaces
 
 ```
-# Install `pnpm` globally
-npm install -g pnpm
+# npm 7 is required
+npm --version
 
 git clone https://github.com/neon-bindings/examples.git
 cd examples
-pnpm install
+npm install
 ```
 
 ### Tests
 
 ```
-pnpm test -r
+npm test
 ```
