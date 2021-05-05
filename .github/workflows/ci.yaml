@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    # Prevent duplicate runs of this workflow on our own internal PRs.
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+        rust-toolchain: [stable]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Rust ${{ matrix.rust-toolchain }}
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ matrix.rust-toolchain }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install npm
+        run: npm install -g npm@^7
+      - name: Install workspace
+        run: npm install
+      - name: Run tests
+        run: npm test
