@@ -1,0 +1,26 @@
+{
+  "name": "neon-examples",
+  "version": "1.0.0",
+  "description": "Neon Examples",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "pnpm test -r"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neon-bindings/examples.git"
+  },
+  "keywords": [
+    "Neon",
+    "Examples",
+    "Rust"
+  ],
+  "author": "K.J. Valencik",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neon-bindings/examples/issues"
+  },
+  "homepage": "https://github.com/neon-bindings/examples"
+}
