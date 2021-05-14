@@ -1,5 +1,6 @@
 [workspace]
 members = [
+	"examples/async-sqlite",
 	"examples/hello-world",
 	"examples/cpu-count",
 ]
