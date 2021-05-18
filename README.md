@@ -12,12 +12,13 @@ All examples are for [`napi-backend`][napi-migration]. For examples using `legac
 
 ## Table of Contents
 
-| Example                      | Description                                |
-| ---------------------------- | ------------------------------------------ |
-| [`cpu-count`][cpu-count]     | Return the number of CPUs                  |
-| [`hello-world`][hello-world] | Return a JS String with a greeting message |
+| Example                        | Description                                |
+| ------------------------------ | ------------------------------------------ |
+| [`async-sqlite`][async-sqlite] | Async interface to a SQLite database       |
+| [`cpu-count`][cpu-count]       | Return the number of CPUs                  |
+| [`hello-world`][hello-world]   | Return a JS String with a greeting message |
 
-
+[async-sqlite]: examples/async-sqlite
 [cpu-count]: examples/cpu-count
 [hello-world]: examples/hello-world
 
