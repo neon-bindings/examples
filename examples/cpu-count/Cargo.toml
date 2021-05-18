@@ -1,13 +1,16 @@
 [package]
-name = "hello-world"
+name = "cpu-count"
 version = "0.1.0"
-description = "Neon Hello World"
+description = "CPU Count"
 license = "MIT"
 edition = "2018"
 exclude = ["index.node"]
 
 [lib]
 crate-type = ["cdylib"]
+
+[dependencies]
+num_cpus = "1"
 
 [dependencies.neon]
 version = "0.8"

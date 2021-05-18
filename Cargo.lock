@@ -9,6 +9,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
+name = "cpu-count"
+version = "0.1.0"
+dependencies = [
+ "neon",
+ "num_cpus",
+]
+
+[[package]]
 name = "cslice"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -20,6 +28,21 @@ version = "0.1.0"
 dependencies = [
  "neon",
 ]
+
+[[package]]
+name = "hermit-abi"
+version = "0.1.18"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "322f4de77956e22ed0e5032c359a0f1273f1f7f0d79bfa3b8ffbc730d7fbcc5c"
+dependencies = [
+ "libc",
+]
+
+[[package]]
+name = "libc"
+version = "0.2.94"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "18794a8ad5b29321f790b55d93dfba91e125cb1a9edbd4f8e3150acc771c1a5e"
 
 [[package]]
 name = "libloading"
@@ -70,6 +93,16 @@ dependencies = [
  "cfg-if",
  "libloading",
  "smallvec",
+]
+
+[[package]]
+name = "num_cpus"
+version = "1.13.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "05499f3756671c15885fee9034446956fff3f243d6077b91e5767df161f766b3"
+dependencies = [
+ "hermit-abi",
+ "libc",
 ]
 
 [[package]]
