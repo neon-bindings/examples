@@ -14,8 +14,11 @@ All examples are for [`napi-backend`][napi-migration]. For examples using `legac
 
 | Example                      | Description                                |
 | ---------------------------- | ------------------------------------------ |
+| [`cpu-count`][cpu-count]     | Return the number of CPUs                  |
 | [`hello-world`][hello-world] | Return a JS String with a greeting message |
 
+
+[cpu-count]: examples/cpu-count
 [hello-world]: examples/hello-world
 
 ## Contributing
