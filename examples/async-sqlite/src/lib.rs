@@ -4,7 +4,7 @@ use std::thread;
 use neon::prelude::*;
 use rusqlite::Connection;
 
-type DbCallback = Box<dyn FnOnce(&mut Connection, &EventQueue) + Send>;
+type DbCallback = Box<dyn FnOnce(&mut Connection, &Channel) + Send>;
 
 // Wraps a SQLite connection a channel, allowing concurrent access
 struct Database {
@@ -41,11 +41,11 @@ impl Database {
         // Open a connection sqlite, this will be moved to the thread
         let mut conn = Connection::open_in_memory()?;
 
-        // Create an `EventQueue` for calling back to JavaScript. It is more efficient
-        // to create a single queue and re-use it for all database callbacks.
-        // The JavaScript process will not exit as long as this queue has not been
+        // Create an `Channel` for calling back to JavaScript. It is more efficient
+        // to create a single channel and re-use it for all database callbacks.
+        // The JavaScript process will not exit as long as this channel has not been
         // dropped.
-        let queue = cx.queue();
+        let channel = cx.channel();
 
         // Create a table in the in-memory database
         // In production code, this would likely be handled somewhere else
@@ -70,10 +70,10 @@ impl Database {
             while let Ok(message) = rx.recv() {
                 match message {
                     DbMessage::Callback(f) => {
-                        // The connection and queue are owned by the thread, but _lent_ to
+                        // The connection and channel are owned by the thread, but _lent_ to
                         // the callback. The callback has exclusive access to the connection
                         // for the duration of the callback.
-                        f(&mut conn, &queue);
+                        f(&mut conn, &channel);
                     }
                     // Immediately close the connection, even if there are pending messages
                     DbMessage::Close => break,
@@ -92,7 +92,7 @@ impl Database {
 
     fn send(
         &self,
-        callback: impl FnOnce(&mut Connection, &EventQueue) + Send + 'static,
+        callback: impl FnOnce(&mut Connection, &Channel) + Send + 'static,
     ) -> Result<(), mpsc::SendError<DbMessage>> {
         self.tx.send(DbMessage::Callback(Box::new(callback)))
     }
@@ -136,7 +136,7 @@ impl Database {
         // Get the `this` value as a `JsBox<Database>`
         let db = cx.this().downcast_or_throw::<JsBox<Database>, _>(&mut cx)?;
 
-        db.send(move |conn, queue| {
+        db.send(move |conn, channel| {
             let result = conn
                 .execute(
                     "INSERT INTO person (name) VALUES (?)",
@@ -144,7 +144,7 @@ impl Database {
                 )
                 .map(|_| conn.last_insert_rowid());
 
-            queue.send(move |mut cx| {
+            channel.send(move |mut cx| {
                 let callback = callback.into_inner(&mut cx);
                 let this = cx.undefined();
                 let args: Vec<Handle<JsValue>> = match result {
@@ -175,12 +175,12 @@ impl Database {
         // Get the `this` value as a `JsBox<Database>`
         let db = cx.this().downcast_or_throw::<JsBox<Database>, _>(&mut cx)?;
 
-        db.send(move |conn, queue| {
+        db.send(move |conn, channel| {
             let result: Result<String, _> = conn
                 .prepare("SELECT name FROM person WHERE id = ?")
                 .and_then(|mut stmt| stmt.query_row(rusqlite::params![id], |row| row.get(0)));
 
-            queue.send(move |mut cx| {
+            channel.send(move |mut cx| {
                 let callback = callback.into_inner(&mut cx);
                 let this = cx.undefined();
                 let args: Vec<Handle<JsValue>> = match result {
