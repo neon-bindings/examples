@@ -35,9 +35,9 @@ Once the database thread is spawned, the JavaScript main thread needs a way to c
 
 Rust data cannot be directly held by JavaScript. The [`JsBox`][jsbox] provides a mechanism for allowing JavaScript to hold a reference to Rust data and later access it again from Rust.
 
-#### Channels and `EventQueue`
+#### Rust and Neon Channels
 
-The mpsc channel provides a way for the JavaScript main thread to communicate with the database thread, but it is one-way. In order to complete the callback, the database thread must be able to communicate with the JavaScript main thread. [`Channel`][channel] provides a channel for sending these events back.
+The mpsc channel provides a way for the JavaScript main thread to communicate with the database thread, but it is one-way. In order to complete the callback, the database thread must be able to communicate with the JavaScript main thread. [`neon::event::Channel`][channel] provides a channel for sending these events back.
 
 #### `Root`
 
@@ -49,7 +49,7 @@ A [`Root`][root] is a special handle to a JavaScript value that prevents the val
 
 [thread]: https://doc.rust-lang.org/std/thread/
 [mpsc]: https://doc.rust-lang.org/std/sync/mpsc/index.html
-[jsbox]: https://docs.rs/neon/0.9.1/neon/types/struct.JsBox.html
-[channel]: https://docs.rs/neon/0.9.1/neon/event/struct.Channel.html
-[handle]: https://docs.rs/neon/0.9.1/neon/handle/struct.Handle.html
-[root]: https://docs.rs/neon/0.9.1/neon/handle/struct.Root.html
+[jsbox]: https://docs.rs/neon/latest/neon/types/struct.JsBox.html
+[channel]: https://docs.rs/neon/latest/neon/event/struct.Channel.html
+[handle]: https://docs.rs/neon/latest/neon/handle/struct.Handle.html
+[root]: https://docs.rs/neon/latest/neon/handle/struct.Root.html
