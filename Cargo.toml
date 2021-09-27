@@ -1,6 +1,10 @@
 [workspace]
 members = [
 	"examples/async-sqlite",
-	"examples/hello-world",
 	"examples/cpu-count",
+	"examples/gzip-stream",
+	"examples/hello-world",
 ]
+
+[profile.release]
+lto = true
