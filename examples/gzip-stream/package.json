@@ -1,0 +1,31 @@
+{
+  "name": "gzip-stream",
+  "version": "0.1.0",
+  "description": "Neon Stream Example",
+  "main": "index.js",
+  "bin": {
+    "compress": "bin/compress.js"
+  },
+  "scripts": {
+    "build": "cargo-cp-artifact -nc index.node -- cargo build --message-format=json-render-diagnostics",
+    "install": "npm run build",
+    "test": "cargo test"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "cargo-cp-artifact": "^0.1",
+    "mocha": "^8.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neon-bindings/examples.git"
+  },
+  "keywords": [
+    "Neon",
+    "Examples"
+  ],
+  "bugs": {
+    "url": "https://github.com/neon-bindings/examples/issues"
+  },
+  "homepage": "https://github.com/neon-bindings/examples#readme"
+}

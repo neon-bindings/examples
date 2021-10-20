@@ -16,10 +16,12 @@ All examples are for [`napi-backend`][napi-migration]. For examples using `legac
 | ------------------------------ | ------------------------------------------ |
 | [`async-sqlite`][async-sqlite] | Async interface to a SQLite database       |
 | [`cpu-count`][cpu-count]       | Return the number of CPUs                  |
+| [`gzip-stream`][gzip-stream]   | Asynchronously compress a stream of data   |
 | [`hello-world`][hello-world]   | Return a JS String with a greeting message |
 
 [async-sqlite]: examples/async-sqlite
 [cpu-count]: examples/cpu-count
+[gzip-stream]: examples/gzip-stream
 [hello-world]: examples/hello-world
 
 ## Contributing

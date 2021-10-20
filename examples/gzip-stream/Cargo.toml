@@ -1,0 +1,18 @@
+[package]
+name = "gzip-stream"
+version = "0.1.0"
+description = "Neon Stream Example"
+license = "MIT"
+edition = "2018"
+exclude = ["index.node"]
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+flate2 = "1"
+
+[dependencies.neon]
+version = "0.10.0-alpha.2"
+default-features = false
+features = ["napi-6", "promise-api", "task-api"]
