@@ -4,6 +4,7 @@ members = [
 	"examples/cpu-count",
 	"examples/gzip-stream",
 	"examples/hello-world",
+	"examples/tokio-fetch",
 ]
 
 [profile.release]

@@ -18,11 +18,13 @@ All examples are for [`napi-backend`][napi-migration]. For examples using `legac
 | [`cpu-count`][cpu-count]       | Return the number of CPUs                  |
 | [`gzip-stream`][gzip-stream]   | Asynchronously compress a stream of data   |
 | [`hello-world`][hello-world]   | Return a JS String with a greeting message |
+| [`tokio-fetch`][tokio-fetch]   | Asynchronously fetch a node release date   |
 
 [async-sqlite]: examples/async-sqlite
 [cpu-count]: examples/cpu-count
 [gzip-stream]: examples/gzip-stream
 [hello-world]: examples/hello-world
+[tokio-fetch]: examples/tokio-fetch
 
 ## Contributing
 

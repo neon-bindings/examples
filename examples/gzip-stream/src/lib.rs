@@ -68,11 +68,11 @@ impl CompressStream {
     // in both `compress_chunk` and `compress_finish`. It grabs any written bytes
     // with `CompressStream::output` and puts the data into an `ArrayBuffer`, throwing
     // a JavaScript exception if any Rust error occurred.
-    fn and_buffer<'a>(
-        cx: &mut TaskContext<'a>,
+    fn and_buffer(
+        mut cx: TaskContext,
         // Return value from `cx.task(..)` closure
         result: Result<Self, CompressError>,
-    ) -> JsResult<'a, JsBuffer> {
+    ) -> JsResult<JsBuffer> {
         let output = result
             // An error may have occurred while compressing; conditionally grab the
             // written data
@@ -81,7 +81,7 @@ impl CompressStream {
             .or_else(|err| cx.throw_error(err.to_string()))?;
 
         // Create a `Buffer` backed by a `Vec<u8>` containing the written data
-        Ok(JsBuffer::external(cx, output))
+        Ok(JsBuffer::external(&mut cx, output))
     }
 }
 
