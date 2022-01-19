@@ -1,0 +1,18 @@
+[package]
+name = "logging"
+version = "0.1.0"
+description = "Neon Logging Example"
+license = "MIT"
+edition = "2018"
+exclude = ["index.node"]
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+log = "0.4"
+
+[dependencies.neon]
+version = "0.10.0-alpha.3"
+default-features = false
+features = ["napi-6", "channel-api"]
