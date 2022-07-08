@@ -16,6 +16,6 @@ tokio = { version = "1", features = ["rt-multi-thread"] }
 serde = { version = "1", features = ["derive"] }
 
 [dependencies.neon]
-version = "0.10.0-alpha.3"
+version = "0.10.1"
 default-features = false
 features = ["channel-api", "napi-6", "promise-api"]

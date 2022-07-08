@@ -29,6 +29,6 @@ describe("SQLite Database", () => {
 
         db.close();
 
-        await assert.rejects(async () => db.byId(5));
+        await assert.rejects(() => db.byId(5), /closed channel/);
     });
 });

@@ -1,10 +1,10 @@
 use std::sync::mpsc;
 use std::thread;
 
-use neon::prelude::*;
+use neon::{prelude::*, types::Deferred};
 use rusqlite::Connection;
 
-type DbCallback = Box<dyn FnOnce(&mut Connection, &Channel) + Send>;
+type DbCallback = Box<dyn FnOnce(&mut Connection, &Channel, Deferred) + Send>;
 
 // Wraps a SQLite connection a channel, allowing concurrent access
 struct Database {
@@ -13,8 +13,10 @@ struct Database {
 
 // Messages sent on the database channel
 enum DbMessage {
-    // Callback to be executed
-    Callback(DbCallback),
+    // Promise to resolve and callback to be executed
+    // Deferred is threaded through the message instead of moved to the closure so that it
+    // can be manually rejected.
+    Callback(Deferred, DbCallback),
     // Indicates that the thread should be stopped and connection closed
     Close,
 }
@@ -69,11 +71,11 @@ impl Database {
             // the thread.
             while let Ok(message) = rx.recv() {
                 match message {
-                    DbMessage::Callback(f) => {
+                    DbMessage::Callback(deferred, f) => {
                         // The connection and channel are owned by the thread, but _lent_ to
                         // the callback. The callback has exclusive access to the connection
                         // for the duration of the callback.
-                        f(&mut conn, &channel);
+                        f(&mut conn, &channel, deferred);
                     }
                     // Immediately close the connection, even if there are pending messages
                     DbMessage::Close => break,
@@ -92,9 +94,11 @@ impl Database {
 
     fn send(
         &self,
-        callback: impl FnOnce(&mut Connection, &Channel) + Send + 'static,
+        deferred: Deferred,
+        callback: impl FnOnce(&mut Connection, &Channel, Deferred) + Send + 'static,
     ) -> Result<(), mpsc::SendError<DbMessage>> {
-        self.tx.send(DbMessage::Callback(Box::new(callback)))
+        self.tx
+            .send(DbMessage::Callback(deferred, Box::new(callback)))
     }
 }
 
@@ -125,18 +129,16 @@ impl Database {
     }
 
     // Inserts a `name` into the database
-    // Accepts a `name` and a `callback` as parameters
-    fn js_insert(mut cx: FunctionContext) -> JsResult<JsUndefined> {
+    // Accepts a `name` and returns a `Promise`
+    fn js_insert(mut cx: FunctionContext) -> JsResult<JsPromise> {
         // Get the first argument as a `JsString` and convert to a Rust `String`
         let name = cx.argument::<JsString>(0)?.value(&mut cx);
 
-        // Get the second argument as a `JsFunction`
-        let callback = cx.argument::<JsFunction>(1)?.root(&mut cx);
-
         // Get the `this` value as a `JsBox<Database>`
         let db = cx.this().downcast_or_throw::<JsBox<Database>, _>(&mut cx)?;
+        let (deferred, promise) = cx.promise();
 
-        db.send(move |conn, channel| {
+        db.send(deferred, move |conn, channel, deferred| {
             let result = conn
                 .execute(
                     "INSERT INTO person (name) VALUES (?)",
@@ -144,68 +146,72 @@ impl Database {
                 )
                 .map(|_| conn.last_insert_rowid());
 
-            channel.send(move |mut cx| {
-                let callback = callback.into_inner(&mut cx);
-                let this = cx.undefined();
-                let args: Vec<Handle<JsValue>> = match result {
-                    Ok(id) => vec![cx.null().upcast(), cx.number(id as f64).upcast()],
-                    Err(err) => vec![cx.error(err.to_string())?.upcast()],
-                };
+            deferred.settle_with(channel, move |mut cx| {
+                let id = result.or_else(|err| cx.throw_error(err.to_string()))?;
 
-                callback.call(&mut cx, this, args)?;
-
-                Ok(())
+                Ok(cx.number(id as f64))
             });
         })
-        .or_else(|err| cx.throw_error(err.to_string()))?;
+        .into_rejection(&mut cx)?;
 
         // This function does not have a return value
-        Ok(cx.undefined())
+        Ok(promise)
     }
 
     // Get a `name` by `id` value
     // Accepts an `id` and callback as parameters
-    fn js_get_by_id(mut cx: FunctionContext) -> JsResult<JsUndefined> {
+    fn js_get_by_id(mut cx: FunctionContext) -> JsResult<JsPromise> {
         // Get the first argument as a `JsNumber` and convert to an `f64`
         let id = cx.argument::<JsNumber>(0)?.value(&mut cx);
 
-        // Get the second argument as a `JsFunction`
-        let callback = cx.argument::<JsFunction>(1)?.root(&mut cx);
-
         // Get the `this` value as a `JsBox<Database>`
         let db = cx.this().downcast_or_throw::<JsBox<Database>, _>(&mut cx)?;
+        let (deferred, promise) = cx.promise();
 
-        db.send(move |conn, channel| {
+        db.send(deferred, move |conn, channel, deferred| {
             let result: Result<String, _> = conn
                 .prepare("SELECT name FROM person WHERE id = ?")
                 .and_then(|mut stmt| stmt.query_row(rusqlite::params![id], |row| row.get(0)));
 
-            channel.send(move |mut cx| {
-                let callback = callback.into_inner(&mut cx);
-                let this = cx.undefined();
-                let args: Vec<Handle<JsValue>> = match result {
-                    // Convert the name to a `JsString` on success and upcast to a `JsValue`
-                    Ok(name) => vec![cx.null().upcast(), cx.string(name).upcast()],
+            deferred.settle_with(channel, move |mut cx| -> JsResult<JsValue> {
+                // If the row was not found, return `undefined` as a success instead
+                // of throwing an exception
+                if matches!(result, Err(rusqlite::Error::QueryReturnedNoRows)) {
+                    return Ok(cx.undefined().upcast());
+                }
 
-                    // If the row was not found, return `undefined` as a success instead
-                    // of throwing an exception
-                    Err(rusqlite::Error::QueryReturnedNoRows) => {
-                        vec![cx.null().upcast(), cx.undefined().upcast()]
-                    }
+                let name = result.or_else(|err| cx.throw_error(err.to_string()))?;
 
-                    // Convert the error to a JavaScript exception on failure
-                    Err(err) => vec![cx.error(err.to_string())?.upcast()],
-                };
-
-                callback.call(&mut cx, this, args)?;
-
-                Ok(())
+                Ok(cx.string(name).upcast())
             });
         })
-        .or_else(|err| cx.throw_error(err.to_string()))?;
+        .into_rejection(&mut cx)?;
 
         // This function does not have a return value
-        Ok(cx.undefined())
+        Ok(promise)
+    }
+}
+
+trait SendResultExt {
+    // Sending a query closure to execute may fail if the channel has been closed.
+    // This method converts the failure into a promise rejection.
+    fn into_rejection<'a, C: Context<'a>>(self, cx: &mut C) -> NeonResult<()>;
+}
+
+impl SendResultExt for Result<(), mpsc::SendError<DbMessage>> {
+    fn into_rejection<'a, C: Context<'a>>(self, cx: &mut C) -> NeonResult<()> {
+        self.or_else(|err| {
+            let msg = err.to_string();
+
+            match err.0 {
+                DbMessage::Callback(deferred, _) => {
+                    let err = cx.error(msg)?;
+                    deferred.reject(cx, err);
+                    Ok(())
+                }
+                DbMessage::Close => cx.throw_error("Expected DbMessage::Callback"),
+            }
+        })
     }
 }
 
