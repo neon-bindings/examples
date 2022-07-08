@@ -20,15 +20,8 @@ fn runtime<'a, C: Context<'a>>(cx: &mut C) -> NeonResult<&'static Runtime> {
 // Get the verson of the currently running node process from [`process.version`](https://nodejs.org/api/process.html#processversion)
 fn node_version<'a, C: Context<'a>>(cx: &mut C) -> NeonResult<String> {
     let global = cx.global();
-
-    let process = global
-        .get(cx, "process")?
-        .downcast_or_throw::<JsObject, _>(cx)?;
-
-    let version = process
-        .get(cx, "version")?
-        .downcast_or_throw::<JsString, _>(cx)?
-        .value(cx);
+    let process = global.get::<JsObject, _, _>(cx, "process")?;
+    let version = process.get::<JsString, _, _>(cx, "version")?.value(cx);
 
     Ok(version)
 }

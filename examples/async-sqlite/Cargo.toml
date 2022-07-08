@@ -13,6 +13,6 @@ crate-type = ["cdylib"]
 rusqlite = "0.25"
 
 [dependencies.neon]
-version = "0.9"
+version = "0.10.1"
 default-features = false
-features = ["napi-6", "event-queue-api", "try-catch-api"]
+features = ["napi-6", "channel-api", "promise-api", "try-catch-api"]
