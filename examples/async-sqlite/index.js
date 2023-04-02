@@ -11,7 +11,7 @@ class Database {
     }
 
     // Wrap each method with a delegate to `this.db`
-    // This could be node in several other ways, for example binding assignment
+    // This could be done in several other ways, for example binding assignment
     // in the constructor
     insert(name) {
         return databaseInsert.call(this.db, name);
