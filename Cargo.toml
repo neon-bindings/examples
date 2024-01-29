@@ -9,3 +9,6 @@ members = [
 
 [profile.release]
 lto = true
+
+[patch.crates-io]
+neon = { git = "https://github.com/neon-bindings/neon.git" }

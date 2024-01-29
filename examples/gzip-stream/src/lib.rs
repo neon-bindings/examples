@@ -5,7 +5,7 @@ use std::sync::{Arc, Mutex, MutexGuard, TryLockError};
 
 use flate2::{write::GzEncoder, Compression};
 use neon::prelude::*;
-use neon::types::buffer::TypedArray;
+use neon::types::{buffer::TypedArray, JsUint8Array};
 use std::fmt::Debug;
 
 #[derive(Clone)]
@@ -54,34 +54,20 @@ impl CompressStream {
     // After each call to `write` or `finish`, data may be written to the internal
     // buffer. This function copies the written data out and resets the buffer
     // to empty.
-    fn output(self) -> Result<Vec<u8>, CompressError> {
-        let mut guard = self.lock()?;
-        let data = guard.get_mut();
-        let output = data.clone();
-
-        data.truncate(0);
-
-        Ok(output)
-    }
-
-    // This is a small helper that is used as the callback to `TaskBuilder::promise`
-    // in both `compress_chunk` and `compress_finish`. It grabs any written bytes
-    // with `CompressStream::output` and puts the data into an `ArrayBuffer`, throwing
-    // a JavaScript exception if any Rust error occurred.
     fn and_buffer(
         mut cx: TaskContext,
         // Return value from `cx.task(..)` closure
         result: Result<Self, CompressError>,
-    ) -> JsResult<JsBuffer> {
-        let output = result
-            // An error may have occurred while compressing; conditionally grab the
-            // written data
-            .and_then(|stream| stream.output())
-            // Convert a Rust error to a JavaScript exception
-            .or_else(|err| cx.throw_error(err.to_string()))?;
+    ) -> JsResult<JsUint8Array> {
+        let stream = result.or_else(|err| cx.throw_error(err))?;
+        let mut guard = stream.lock().or_else(|err| cx.throw_error(err))?;
 
-        // Create a `Buffer` backed by a `Vec<u8>` containing the written data
-        Ok(JsBuffer::external(&mut cx, output))
+        let data = guard.get_mut();
+        let output = JsUint8Array::from_slice(&mut cx, data)?;
+
+        data.truncate(0);
+
+        Ok(output)
     }
 }
 
@@ -117,6 +103,12 @@ impl fmt::Display for CompressError {
 
 impl Error for CompressError {}
 
+impl AsRef<str> for CompressError {
+    fn as_ref(&self) -> &str {
+        &self.0
+    }
+}
+
 // Create a boxed `CompressStream` that can be passed to JavaScript and back
 fn compress_new(mut cx: FunctionContext) -> JsResult<JsBox<CompressStream>> {
     // Best compression because why not?
@@ -142,7 +134,7 @@ fn compress_chunk(mut cx: FunctionContext) -> JsResult<JsPromise> {
     // types, giving a `CompressStream`. However, it's impossible to move out of a
     // `JsBox`, so a reference is immediately taken with `&`. Finally, we can call the
     // `clone` implementation on `CompressStream`.
-    let stream = (&**cx.argument::<JsBox<CompressStream>>(0)?).clone();
+    let stream = (**cx.argument::<JsBox<CompressStream>>(0)?).clone();
 
     // The 2nd argument is `encoding`. However, gzip is encoding agnostic and we do not need it.
     // let encoding = cx.argument::<JsString>(1)?;
@@ -164,9 +156,9 @@ fn compress_chunk(mut cx: FunctionContext) -> JsResult<JsPromise> {
 // Complete compressing the data and get the remaining output
 fn compress_finish(mut cx: FunctionContext) -> JsResult<JsPromise> {
     // Get a shallow clone of `CompressStream`; same as in `compress_chunk`
-    // This is an alternative to the `&**` syntax used earlier. Instead, it uses auto-deref
+    // This is an alternative to the `**` syntax used earlier. Instead, it uses auto-deref
     // and universal call syntax for the `clone` call to coerce to proper type.
-    let stream = CompressStream::clone(&&cx.argument::<JsBox<CompressStream>>(0)?);
+    let stream = CompressStream::clone(&*cx.argument::<JsBox<CompressStream>>(0)?);
 
     let promise = cx
         // Finish the stream on the Node worker pool

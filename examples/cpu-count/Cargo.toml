@@ -10,9 +10,5 @@ exclude = ["index.node"]
 crate-type = ["cdylib"]
 
 [dependencies]
+neon = "1"
 num_cpus = "1"
-
-[dependencies.neon]
-version = "0.10.1"
-default-features = false
-features = ["napi-6"]

@@ -120,8 +120,7 @@ impl Database {
     // immediately instead of waiting on garbage collection. This is useful in tests.
     fn js_close(mut cx: FunctionContext) -> JsResult<JsUndefined> {
         // Get the `this` value as a `JsBox<Database>`
-        cx.this()
-            .downcast_or_throw::<JsBox<Database>, _>(&mut cx)?
+        cx.this::<JsBox<Database>>()?
             .close()
             .or_else(|err| cx.throw_error(err.to_string()))?;
 
@@ -135,7 +134,7 @@ impl Database {
         let name = cx.argument::<JsString>(0)?.value(&mut cx);
 
         // Get the `this` value as a `JsBox<Database>`
-        let db = cx.this().downcast_or_throw::<JsBox<Database>, _>(&mut cx)?;
+        let db = cx.this::<JsBox<Database>>()?;
         let (deferred, promise) = cx.promise();
 
         db.send(deferred, move |conn, channel, deferred| {
@@ -154,7 +153,6 @@ impl Database {
         })
         .into_rejection(&mut cx)?;
 
-        // This function does not have a return value
         Ok(promise)
     }
 
@@ -165,7 +163,7 @@ impl Database {
         let id = cx.argument::<JsNumber>(0)?.value(&mut cx);
 
         // Get the `this` value as a `JsBox<Database>`
-        let db = cx.this().downcast_or_throw::<JsBox<Database>, _>(&mut cx)?;
+        let db = cx.this::<JsBox<Database>>()?;
         let (deferred, promise) = cx.promise();
 
         db.send(deferred, move |conn, channel, deferred| {
@@ -187,7 +185,6 @@ impl Database {
         })
         .into_rejection(&mut cx)?;
 
-        // This function does not have a return value
         Ok(promise)
     }
 }
