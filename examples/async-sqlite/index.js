@@ -1,7 +1,5 @@
 "use strict";
 
-const { promisify } = require("util");
-
 const { databaseNew, databaseClose, databaseInsert, databaseGetById } = require("./index.node");
 
 // Wrapper class for the boxed `Database` for idiomatic JavaScript usage
