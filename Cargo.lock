@@ -1221,10 +1221,8 @@ name = "tokio-fetch"
 version = "0.1.0"
 dependencies = [
  "neon",
- "once_cell",
  "reqwest",
  "serde",
- "tokio",
 ]
 
 [[package]]
