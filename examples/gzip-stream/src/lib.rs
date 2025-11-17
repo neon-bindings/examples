@@ -3,9 +3,9 @@ use std::fmt;
 use std::io::{self, Write};
 use std::sync::{Arc, Mutex, MutexGuard, TryLockError};
 
-use flate2::{write::GzEncoder, Compression};
+use flate2::{Compression, write::GzEncoder};
 use neon::prelude::*;
-use neon::types::{buffer::TypedArray, JsUint8Array};
+use neon::types::{JsUint8Array, buffer::TypedArray};
 use std::fmt::Debug;
 
 #[derive(Clone)]
@@ -31,7 +31,7 @@ impl CompressStream {
     }
 
     // Attempt to obtain a mutable reference to the stream
-    fn lock(&self) -> Result<MutexGuard<GzEncoder<Vec<u8>>>, CompressError> {
+    fn lock(&self) -> Result<MutexGuard<'_, GzEncoder<Vec<u8>>>, CompressError> {
         // Use `try_lock` instead of `lock` because multiple concurrent calls
         // to the encoder is undefined. The caller *must* be careful to serially
         // write to the stream. `Transform` provides this guarantee by applying

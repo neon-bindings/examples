@@ -3,7 +3,7 @@ name = "gzip-stream"
 version = "0.1.0"
 description = "Neon Stream Example"
 license = "MIT"
-edition = "2018"
+edition = "2024"
 exclude = ["index.node"]
 
 [lib]
@@ -11,4 +11,4 @@ crate-type = ["cdylib"]
 
 [dependencies]
 flate2 = "1"
-neon = "1"
+neon.workspace = true

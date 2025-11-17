@@ -3,15 +3,15 @@ name = "tokio-fetch"
 version = "0.1.0"
 description = "Neon Tokio and Rust Async Example"
 license = "MIT"
-edition = "2018"
+edition = "2024"
 exclude = ["index.node"]
 
 [lib]
 crate-type = ["cdylib"]
 
 [dependencies]
-neon = "1"
+neon.workspace = true
 once_cell = "1"
-reqwest = { version = "0.11", features = ["json"] }
+reqwest = { version = "0.12.24", features = ["json"] }
 tokio = { version = "1", features = ["rt-multi-thread"] }
 serde = { version = "1", features = ["derive"] }

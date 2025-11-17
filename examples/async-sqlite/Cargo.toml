@@ -3,12 +3,12 @@ name = "async-sqlite"
 version = "0.1.0"
 description = "Neon Async SQLite"
 license = "MIT"
-edition = "2018"
+edition = "2024"
 exclude = ["index.node"]
 
 [lib]
 crate-type = ["cdylib"]
 
 [dependencies]
-neon = "1"
-rusqlite = "0.25"
+neon.workspace = true
+rusqlite = "0.37.0"
