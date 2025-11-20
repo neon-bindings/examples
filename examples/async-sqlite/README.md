@@ -5,7 +5,7 @@ The Async SQLite example implements a simple database in Rust with a JavaScript 
 ## Usage
 
 ```js
-const Database = require(".");
+const { Database } = require(".");
 
 (async () => {
     const db = new Database();
@@ -31,25 +31,18 @@ Since SQLite is naturally single threaded, our application does not benefit from
 
 Once the database thread is spawned, the JavaScript main thread needs a way to communicate with it. A [multi-producer, single-consumer (mpsc)][mpsc] channel is created. The receiving end is owned by the database thread and the sender is held by JavaScript.
 
-#### `JsBox`
+#### `#[neon::export(class)]`
 
-Rust data cannot be directly held by JavaScript. The [`JsBox`][jsbox] provides a mechanism for allowing JavaScript to hold a reference to Rust data and later access it again from Rust.
+The Rust sender side of the channel is held in a JavaScript [class][class]. It can be referenced later in methods.  
 
 #### Rust and Neon Channels
 
 The mpsc channel provides a way for the JavaScript main thread to communicate with the database thread, but it is one-way. In order to complete the callback, the database thread must be able to communicate with the JavaScript main thread. [`neon::event::Channel`][channel] provides a channel for sending these events back.
 
-#### `Root`
-
-The last issue to solve is sending a reference to the JavaScript callback to the database thread and back again before finally calling it. [Handles][handle] to JavaScript values are not `Send`; they cannot escape the scope that created them. The reason they cannot be passed to other threads is because when control is returned back to the JavaScript engine, the garbage collector may determine they are no longer used and free the value.
-
-A [`Root`][root] is a special handle to a JavaScript value that prevents the value from being freed as long as the `Root` has not been dropped. By placing the callback in a `Root`, it can be safely sent across threads and finally accessed and called when back on the JavaScript main thread.
-
 ### JavaScript
 
 [thread]: https://doc.rust-lang.org/std/thread/
 [mpsc]: https://doc.rust-lang.org/std/sync/mpsc/index.html
-[jsbox]: https://docs.rs/neon/latest/neon/types/struct.JsBox.html
+[class]: https://docs.rs/neon/latest/neon/attr.class.html
 [channel]: https://docs.rs/neon/latest/neon/event/struct.Channel.html
 [handle]: https://docs.rs/neon/latest/neon/handle/struct.Handle.html
-[root]: https://docs.rs/neon/latest/neon/handle/struct.Root.html

@@ -2,7 +2,7 @@
 
 const assert = require("assert");
 
-const Database = require("..");
+const { Database } = require("..");
 
 describe("SQLite Database", () => {
     it("should insert and return name", async () => {
@@ -27,8 +27,7 @@ describe("SQLite Database", () => {
     it("should reject calls to a closed database", async () => {
         const db = new Database();
 
-        db.close();
-
-        await assert.rejects(() => db.byId(5), /closed channel/);
+        await db.close();
+        await assert.rejects(() => db.byId(5), /closed/);
     });
 });
