@@ -4,11 +4,7 @@
 
 Examples and common patterns for [Neon][neon].
 
-All examples are for [`napi-backend`][napi-migration]. For examples using `legacy-backend` see the [`legacy`][legacy] branch. 
-
 [neon]: https://github.com/neon-bindings/neon
-[napi-migration]: https://github.com/neon-bindings/neon/blob/main/MIGRATION_GUIDE.md#n-api-migration-guide
-[legacy]: https://github.com/neon-bindings/examples/tree/legacy
 
 ## Table of Contents
 
