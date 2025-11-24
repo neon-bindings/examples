@@ -31,17 +31,26 @@ fn node_version(cx: &mut Cx) -> NeonResult<String> {
     cx.global::<JsObject>("process")?.prop(cx, "version").get()
 }
 
+// Export an async JavaScript function where the body is executed on the tokio thread pool
+#[neon::export]
+async fn node_release_date(version: String) -> Result<String, Error> {
+    let release = fetch_node_release(&version)
+        .await?
+        .ok_or_else(|| format!("Could not find version: {version}"))?;
+
+    Ok(release.date)
+}
+
+// Similar to `node_release_date`, but includes some setup code synchronously executed
+// on the JavaScript main thread before return a task for tokio. Since this is not
+// an `async fn`, we need to explicitly tell the export macro that it returns a future.
 #[neon::export(async)]
-fn node_release_date(
+fn current_node_release_date(
     cx: &mut Cx,
 ) -> NeonResult<impl Future<Output = Result<String, Error>> + use<>> {
+    // Executes synchronously on the JavaScript main thread
     let version = node_version(cx)?;
 
-    Ok(async move {
-        let release = fetch_node_release(&version)
-            .await?
-            .ok_or_else(|| format!("Could not find version: {version}"))?;
-
-        Ok(release.date)
-    })
+    // This task is executed asynchronously on the tokio thread pool
+    Ok(node_release_date(version))
 }
