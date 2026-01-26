@@ -8,12 +8,14 @@ use neon::{
 
 use rusqlite::Connection;
 
-type DbCallback =
-    Box<dyn FnOnce(&mut Connection, &Channel, Deferred) -> ControlFlow<(), ()> + Send>;
+// `DbTask` is a low level task that is executed on the database event loop thread. It
+// is responsible for executing user-provided functions as well as terminating the event loop.
+type DbTask = Box<dyn FnOnce(&mut Connection, &Channel, Deferred) -> ControlFlow<(), ()> + Send>;
 
-// Wraps a SQLite connection a channel, allowing concurrent access
+// Wraps a channel to a SQLite connection, allowing concurrent access
+// Note: The connection will be dropped when all senders have been dropped.
 struct Database {
-    tx: mpsc::Sender<(Deferred, DbCallback)>,
+    tx: mpsc::Sender<(Deferred, DbTask)>,
 }
 
 // Internal implementation
@@ -33,29 +35,43 @@ impl Database {
         for<'a> O: TryIntoJs<'a, Value = V> + Send + 'static,
         V: Value,
     {
-        let (d, promise) = cx.promise();
-        let Err(mpsc::SendError((d, _))) = self.tx.send((
-            d,
-            Box::new(move |conn, ch, d| {
-                let output = f(conn).continue_value();
-                let should_break = output.is_none();
-                let res = d.try_settle_with(ch, move |mut cx| output.try_into_js(&mut cx));
+        let (deferred, promise) = cx.promise();
 
-                // If we can no longer settle promises, we can stop the worker thread
-                if res.is_err() || should_break {
-                    ControlFlow::Break(())
-                } else {
-                    ControlFlow::Continue(())
-                }
-            }),
-        )) else {
-            return Ok(promise);
-        };
+        // Create a callback that will execute on the database worker thread
+        let callback: DbTask = Box::new(move |conn, channel, deferred| {
+            // Execute the user's function
+            let control_flow_result = f(conn);
 
-        let err = cx.error("Database is closed")?;
-        d.reject(cx, err);
+            // Check if the function requested to break the loop before extracting the value
+            let should_stop_worker = control_flow_result.is_break();
 
-        Ok(promise)
+            // Extract the output value
+            let output = control_flow_result.continue_value();
+
+            // Settle the promise with the output value
+            let settle_result =
+                deferred.try_settle_with(channel, move |mut cx| output.try_into_js(&mut cx));
+
+            // Stop the worker thread if:
+            // 1. We can no longer settle promises (channel closed), or
+            // 2. The function explicitly requested to break
+            if settle_result.is_err() || should_stop_worker {
+                ControlFlow::Break(())
+            } else {
+                ControlFlow::Continue(())
+            }
+        });
+
+        // Send the callback to the worker thread
+        match self.tx.send((deferred, callback)) {
+            Ok(_) => Ok(promise),
+            Err(mpsc::SendError((deferred, _))) => {
+                // Database is closed, reject the promise
+                let err = cx.error("Database is closed")?;
+                deferred.reject(cx, err);
+                Ok(promise)
+            }
+        }
     }
 }
 
@@ -69,7 +85,7 @@ impl Database {
         // Open a connection sqlite, this will be moved to the thread
         let mut conn = Connection::open_in_memory()?;
 
-        // Create an `Channel` for calling back to JavaScript. It is more efficient
+        // Create a `Channel` for calling back to JavaScript. It is more efficient
         // to create a single channel and re-use it for all database callbacks.
         // The JavaScript process will not exit as long as this channel has not been
         // dropped.
@@ -88,16 +104,16 @@ impl Database {
             [],
         )?;
 
-        // Spawn a thread for processing database queries
+        // Spawn a thread to act as the database event loop.
         // This will not block the JavaScript main thread and will continue executing
         // concurrently.
         thread::spawn(move || {
-            // Blocks until a callback is available
-            // When the instance of `Database` is dropped, the channel will be closed
-            // and `rx.recv()` will return an `Err`, ending the loop and terminating
+            // Blocks until a callback is available.
+            // When the instance of the `Database` class is dropped, the channel will be
+            // closed and `rx.recv()` will return an `Err`, ending the loop and terminating
             // the thread.
             while let Ok((d, callback)) = rx.recv() {
-                // Returning `true` means to _stop_
+                // Returning `ControlFlow::Break` means to immediately _stop_ the loop and close the database connection
                 if callback(&mut conn, &channel, d).is_break() {
                     break;
                 }
@@ -108,9 +124,9 @@ impl Database {
     }
 
     // Inserts a `name` into the database
-    // Accepts a `name` and returns a `Promise`
+    // Accepts a `name` and returns a `Promise<number>`
     fn insert<'cx>(&self, cx: &mut Cx<'cx>, name: String) -> JsResult<'cx, JsPromise> {
-        self.exec(cx, move |conn| -> Result<_, Error> {
+        self.exec(cx, move |conn| -> Result<f64, Error> {
             conn.execute(
                 "INSERT INTO person (name) VALUES (?)",
                 rusqlite::params![name],
@@ -135,8 +151,13 @@ impl Database {
         })
     }
 
+    // Many more methods can be added here by using the simple `self.send(..)` pattern.
+
     // Idiomatic rust would take an owned `self` to prevent use after close
-    // However, it's not possible to prevent JavaScript from continuing to hold a closed database
+    // However, it's not possible to prevent JavaScript from continuing to hold a closed database.
+    // Instead, we send a `ControlFlow::Break` to stop the loop and drop the `mpsc` channel. Once
+    // dropped, the channel will be closed and sending messages will result in an error. These
+    // errors will be converted into a `Promise` rejection.
     fn close<'cx>(&self, cx: &mut Cx<'cx>) -> JsResult<'cx, JsPromise> {
         self.send(cx, |_| ControlFlow::<(), ()>::Break(()))
     }
