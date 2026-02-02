@@ -2,7 +2,7 @@
   "name": "async-sqlite",
   "version": "0.1.0",
   "description": "Neon Async SQLite",
-  "main": "index.js",
+  "main": "index.node",
   "scripts": {
     "build": "cargo-cp-artifact -nc index.node -- cargo build --message-format=json-render-diagnostics",
     "install": "npm run build",

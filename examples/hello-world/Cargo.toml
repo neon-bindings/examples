@@ -3,11 +3,11 @@ name = "hello-world"
 version = "0.1.0"
 description = "Neon Hello World"
 license = "MIT"
-edition = "2018"
+edition = "2024"
 exclude = ["index.node"]
 
 [lib]
 crate-type = ["cdylib"]
 
 [dependencies]
-neon = "1"
+neon.workspace = true

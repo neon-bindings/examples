@@ -25,17 +25,19 @@ The `flush` method allows any internally buffered data to be processed before co
 
 ```js
 function compress() {
-    const compressor = compressNew();
+    const stream = new CompressStream();
 
     return new Transform({
         transform(chunk, encoding, callback) {
-            compressChunk(compressor, encoding, chunk)
+            stream
+                .compress(encoding, chunk)
                 .then(data => callback(null, data))
                 .catch(callback);
         },
 
         flush(callback) {
-            compressFinish(compressor)
+            stream
+                .finish()
                 .then(data => callback(null, data))
                 .catch(callback);
         }
@@ -43,64 +45,23 @@ function compress() {
 }
 ```
 
-The glue code exports a single function `compress` that creates a `Transform` stream delegating the implementation to Neon functions. Since these functions return promises, they are adapted to the `callback` style continuation that `Transform` expects.
+The glue code exports a single function `compress` responsible for creating a `Transform` stream, delegating to the `CompressStream` class and adapting [`Promise`s](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) to callbacks.  
 
 ## Neon
 
-The Neon module exports three functions:
+The Neon module exports a `CompressSteam` class with two methods:
 
-* [`compressNew`](#compressnew)
-* [`compressChunk`](#compresschunkcompressstream-chunk-encoding-callback)
-* [`compressFinish`](#compressfinishcompressstream-callback)
+* [`compress`](#compresschunk-encoding)
+* [`finish`](#finish)
 
-### `compressNew()`
+### `new CompressStream(level)`
 
-```rust
-fn compress_new(mut cx: FunctionContext) -> JsResult<JsBox<CompressStream>> {
-    let stream = CompressStream::new(Compression::best());
+Creates a new instance of the `CompressStream` class with an optional gzip level.
 
-    Ok(cx.boxed(stream))
-}
-```
+### `compress(chunk, encoding)`
 
-`compressNew` creates an instance of the stateful Rust struct, `CompressStream`, and returns it wrapped in a [`JsBox`](https://docs.rs/neon/latest/neon/types/struct.JsBox.html). Each of the other two methods expects `CompressStream` as the first argument. This pattern is similar to using [`Function.prototype.call`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) on a class method to manually bind `this`.
+Compresses a chunk, returning flushed data as an `ArrayBuffer`.
 
-### `compressChunk(compressStream, chunk, encoding, callback)`
+### `finish()`
 
-```rust
-fn compress_chunk(mut cx: FunctionContext) -> JsResult<JsPromise> {
-    let stream = (&**cx.argument::<JsBox<CompressStream>>(0)?).clone();
-    let chunk = cx.argument::<JsTypedArray<u8>>(2)?
-        .as_slice(&cx)
-        .to_vec();
-
-    let promise = cx
-        .task(move || stream.write(chunk))
-        .promise(CompressStream::and_buffer);
-
-    Ok(promise)
-}
-```
-
-`compressChunk` accepts the instance of the `CompressStream` struct and the other arguments to the [`transform`](#transformchunk-encoding-callback) function. The chunk is cloned to a `Vec<u8>` and passed to a task to execute on the Node worker pool. The asynchronous task compresses the data and passes the compressed data to the `.promise(|cx, result| { ... })` callback. The callback to `promise` is executed on the JavaScript main thread and converts the compressed `Vec<u8>` to a `JsBuffer` and resolves the promise.
-
-`CompressChunk::and_buffer` is used to create a `Buffer`. `ArrayBuffer` cannot be used because stream chunks are required to be an instance of `Uint8Array`. `Buffer` is a subclass of `Uint8Array`.
-
-### `compressFinish(compressStream, callback)`
-
-fn compress_finish(mut cx: FunctionContext) -> JsResult<JsPromise> {
-let stream = (&**cx.argument::<JsBox<CompressStream>>(0)?).clone();
-
-```rust
-fn compress_finish(mut cx: FunctionContext) -> JsResult<JsPromise> {
-    let stream = (&**cx.argument::<JsBox<CompressStream>>(0)?).clone();
-
-    let promise = cx
-        .task(move || stream.finish())
-        .promise(CompressStream::and_buffer);
-
-    Ok(promise)
-}
-```
-
-`compressFinish` works very similar to [`compressChunkl`](#compresschunkcompressstream-chunk-encoding-callback), except it is provided the arguments to [`flush`](#flushcallback) which does not include any data. Instead, the remaining buffered data is compressed, a CRC is calculated, and the compressed gzip data is completed.
+`finish` works very similar to [`compress`](#compresschunk-encoding), except it is provided the arguments to [`flush`](#flushcallback) which does not include any data. Instead, the remaining buffered data is compressed, a CRC is calculated, and the compressed gzip data is completed.

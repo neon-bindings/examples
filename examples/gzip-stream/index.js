@@ -4,24 +4,26 @@
 // source and produces new bytes for a destination sink.
 const { Transform } = require("stream");
 
-const { compressNew, compressChunk, compressFinish } = require("./index.node");
+const { CompressStream } = require("./index.node");
 
 // Creates a gzip compression transform stream, implemented asynchronously in Rust
 function compress() {
     // Create a native streaming gzip compressing with Neon
-    const compressor = compressNew();
+    const stream = new CompressStream();
 
     return new Transform({
         // Compress a chunk of data by delegating to `compressChunk`
         transform(chunk, encoding, callback) {
-            compressChunk(compressor, encoding, chunk)
+            stream
+                .compress(encoding, chunk)
                 .then(data => callback(null, data))
                 .catch(callback);
         },
 
         // Complete the compression by delegating to `compressFinish`
         flush(callback) {
-            compressFinish(compressor)
+            stream
+                .finish()
                 .then(data => callback(null, data))
                 .catch(callback);
         }

@@ -5,7 +5,7 @@ The `cpu-count` example exposes a single function named `get` that returns the n
 ## Usage
 
 ```js
-const cpuCount = require(".");
+const { getNumCpus } = require(".");
 
-console.log(cpuCount.get());
+console.log(getNumCpus());
 ```
