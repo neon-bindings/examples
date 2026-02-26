@@ -1,0 +1,14 @@
+[package]
+name = "porting-may_minihttp"
+version = "0.1.0"
+description = "Porting of the crate may_minihttp"
+license = "MIT"
+edition = "2021"
+exclude = ["index.node"]
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+neon = "1.1.0-alpha.1"
+may_minihttp = "0.1.11"
