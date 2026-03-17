@@ -54,3 +54,26 @@ fn current_node_release_date(
     // This task is executed asynchronously on the tokio thread pool
     Ok(node_release_date(version))
 }
+
+#[neon::export]
+async fn node_release_date_with_abort(
+    version: String,
+    token: CancellationToken,
+) -> Result<String, Error> {
+    tokio::select! {
+        release = node_release_date(version) => release,
+        _ = token.token.cancelled() => Err(Error::new("Request aborted")),
+    }
+}
+
+#[derive(Clone, Debug, Default)]
+struct CancellationToken {
+    token: tokio_util::sync::CancellationToken,
+}
+
+#[neon::export(class)]
+impl CancellationToken {
+    fn cancel(&self) {
+        self.token.cancel();
+    }
+}
